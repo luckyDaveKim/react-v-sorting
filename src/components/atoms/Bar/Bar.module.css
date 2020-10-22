@@ -1,0 +1,10 @@
+@import '../../../styles/color.css';
+
+.Bar {
+  width: 100px;
+  background-color: var(--blue);
+  margin: 1px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
