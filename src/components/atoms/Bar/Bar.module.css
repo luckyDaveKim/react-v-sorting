@@ -2,9 +2,21 @@
 
 .Bar {
   width: 100px;
-  background-color: var(--blue);
+  background-color: var(--gray);
   margin: 1px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+}
+
+.BarComparing {
+  background-color: var(--red);
+}
+
+.BarCompared {
+  background-color: var(--green);
+}
+
+.BarSorting {
+  background-color: var(--blue);
 }

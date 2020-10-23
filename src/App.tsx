@@ -1,23 +1,34 @@
 import React, {useState} from 'react'
 import styles from './App.module.css'
-import Chart, {Data} from './components/molecules/Chart/Chart'
+import SortChart, {SortChartData} from './components/molecules/Chart/SortChart'
 
 const App: React.FC = () => {
   const MAX_VALUE = 100
   const NUM_SIZE = 10
-  const [num, setNum] = useState<Data>([])
-  const [timeoutIds, setTimeoutIds] = useState<number[]>([])
+  const [capture, setCapture] = useState<SortChartData>({
+    data: [],
+    comparingIndices: [],
+    comparedIndices: [],
+    sortedIndices: []
+  })
+  const [timeoutIds, setTimeoutIds] = useState<NodeJS.Timeout[]>([])
 
   const run = () => {
     // clear running data, before run
     clearTimeouts()
 
-    const nums = generateNums()
-    const history = selectionSort(nums)
-    runVisualize(history)
+    const data = generateRamdomData()
+    const trace = selectionSort(data)
+    runVisualize(trace)
   }
 
-  const generateNums = (): number[] => {
+  const clearTimeouts = () => {
+    timeoutIds.forEach(timeoutId =>
+      clearTimeout(timeoutId)
+    )
+  }
+
+  const generateRamdomData = (): number[] => {
     const nums: number[] = []
     for (let i = 0; i < NUM_SIZE; i++) {
       const randomNum = generateRandomNum(MAX_VALUE)
@@ -30,37 +41,90 @@ const App: React.FC = () => {
     return Math.round(Math.random() * maxValue)
   }
 
-  const selectionSort = (nums: Data): Data[] => {
-    const history: Data[] = [[...nums]]
+  const selectionSort = (data: number[]): SortChartData[] => {
+    const trace: SortChartData[] = []
 
-    const dataSize = nums.length
-    for (let i = 0; i < dataSize - 1; i++) {
-      for (let pivot = i + 1; pivot < dataSize; pivot++) {
-        if (nums[pivot] < nums[i]) {
-          swap(nums, i, pivot)
-          history.push([...nums])
-        }
-      }
+    const addToTrace = ({
+                          data,
+                          comparingIndices,
+                          comparedIndices,
+                          sortedIndices
+                        }: SortChartData) => {
+      trace.push({
+        data: [...data],
+        comparingIndices: [...comparingIndices],
+        comparedIndices: [...comparedIndices],
+        sortedIndices: [...sortedIndices]
+      })
     }
 
-    return history
+    // add init trace
+    addToTrace({
+      data,
+      comparingIndices: [],
+      comparedIndices: [],
+      sortedIndices: []
+    })
+
+    const dataSize = data.length
+    for (let i = 0; i < dataSize - 1; i++) {
+      for (let pivot = i + 1; pivot < dataSize; pivot++) {
+        // add comparing trace
+        addToTrace({
+          data,
+          comparingIndices: [i, pivot],
+          comparedIndices: [],
+          sortedIndices: [...trace[trace.length - 1].sortedIndices]
+        })
+
+        if (data[pivot] < data[i]) {
+          swap(data, i, pivot)
+
+          // add compared trace
+          addToTrace({
+            data,
+            comparingIndices: [i, pivot],
+            comparedIndices: [i, pivot],
+            sortedIndices: [...trace[trace.length - 1].sortedIndices]
+          })
+        }
+      }
+
+      // add partial sorted trace
+      addToTrace({
+        data,
+        comparingIndices: [],
+        comparedIndices: [],
+        sortedIndices: [...trace[trace.length - 1].sortedIndices, i]
+      })
+    }
+
+    // add finish sorted trace
+    addToTrace({
+      data,
+      comparingIndices: [],
+      comparedIndices: [],
+      sortedIndices: [...trace[trace.length - 1].sortedIndices, dataSize - 1]
+    })
+
+    return trace
   }
 
-  const swap = (nums: Data, leftIndex: number, rightIndex: number) => {
+  const swap = (nums: number[], leftIndex: number, rightIndex: number) => {
     const tempVal = nums[leftIndex]
     nums[leftIndex] = nums[rightIndex]
     nums[rightIndex] = tempVal
   }
 
-  const runVisualize = (history: Data[]) => {
-    const timeoutIds: number[] = []
+  const runVisualize = (trace: SortChartData[]) => {
+    const timeoutIds: NodeJS.Timeout[] = []
 
-    history.forEach((eachNums, i) => {
-      const timeoutId = setTimeout((curData: Data) => {
-          setNum(curData)
+    trace.forEach((capture, i) => {
+      const timeoutId = setTimeout((capture) => {
+          setCapture(capture)
         },
-        i * 500,
-        eachNums)
+        i * (30 / trace.length) * 1000,
+        capture)
 
       timeoutIds.push(timeoutId)
     })
@@ -72,15 +136,9 @@ const App: React.FC = () => {
     clearTimeouts()
   }
 
-  const clearTimeouts = () => {
-    timeoutIds.forEach(timeoutId =>
-      clearTimeout(timeoutId)
-    )
-  }
-
   return (
     <div className="App">
-      <Chart nums={num} />
+      <SortChart sortChartData={capture} />
 
       <button
         className={styles.RunButton}
