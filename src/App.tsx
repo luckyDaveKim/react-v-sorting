@@ -1,10 +1,15 @@
 import React, {useState} from 'react'
 import styles from './App.module.css'
-import SortChart, {SortChartData} from './components/molecules/Chart/SortChart'
+import SortChart, {SortChartData} from './components/organisms/Chart/SortChart'
+import Controller from './components/organisms/Controller/Controller'
 
 const App: React.FC = () => {
   const MAX_VALUE = 100
   const NUM_SIZE = 10
+  const NORMALIZE_SPEED_VALUE = 100
+  const [speed, setSpeed] = useState<number>(5)
+  const [curIndex, setCurIndex] = useState<number>(0)
+  const [curTrace, setCurTrace] = useState<SortChartData[]>([])
   const [capture, setCapture] = useState<SortChartData>({
     data: [],
     comparingIndices: [],
@@ -16,9 +21,12 @@ const App: React.FC = () => {
   const run = () => {
     // clear running data, before run
     clearTimeouts()
+    clearCurIndex()
+    clearCurTrace()
 
     const data = generateRamdomData()
     const trace = selectionSort(data)
+    setCurTrace(trace)
     runVisualize(trace)
   }
 
@@ -26,6 +34,14 @@ const App: React.FC = () => {
     timeoutIds.forEach(timeoutId =>
       clearTimeout(timeoutId)
     )
+  }
+
+  const clearCurIndex = () => {
+    setCurIndex(0)
+  }
+
+  const clearCurTrace = () => {
+    setCurTrace([])
   }
 
   const generateRamdomData = (): number[] => {
@@ -120,11 +136,19 @@ const App: React.FC = () => {
     const timeoutIds: NodeJS.Timeout[] = []
 
     trace.forEach((capture, i) => {
-      const timeoutId = setTimeout((capture) => {
+      // skip until current index
+      if (i < curIndex) {
+        return
+      }
+
+      const timeout = (i - curIndex) * (NORMALIZE_SPEED_VALUE / (speed * trace.length)) * 1000
+      const timeoutId = setTimeout((capture, curIndex) => {
           setCapture(capture)
+          setCurIndex(curIndex)
         },
-        i * (30 / trace.length) * 1000,
-        capture)
+        timeout,
+        capture,
+        i)
 
       timeoutIds.push(timeoutId)
     })
@@ -134,6 +158,16 @@ const App: React.FC = () => {
 
   const stop = () => {
     clearTimeouts()
+  }
+
+  const handleSpeedChange = (e: any) => {
+    clearTimeouts()
+
+    let speed = Number(e.target.value)
+
+    setSpeed(speed)
+
+    runVisualize(curTrace)
   }
 
   return (
@@ -153,6 +187,18 @@ const App: React.FC = () => {
       >
         Stop
       </button>
+
+      <Controller
+        speed={{
+          text: '속도 조절',
+          data: {
+            value: speed,
+            minVal: 1,
+            maxVal: 10
+          },
+          handleChange: handleSpeedChange
+        }}
+      />
     </div>
   )
 }
