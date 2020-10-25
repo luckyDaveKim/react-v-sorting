@@ -1,15 +1,13 @@
-import React, {useState} from 'react'
-import styles from './App.module.css'
+import React, {useEffect, useState} from 'react'
 import SortChart, {SortChartData} from './components/organisms/Chart/SortChart'
-import Controller from './components/organisms/Controller/Controller'
 
 const App: React.FC = () => {
   const MAX_VALUE = 100
   const NUM_SIZE = 10
   const NORMALIZE_SPEED_VALUE = 100
   const [speed, setSpeed] = useState<number>(5)
-  const [curIndex, setCurIndex] = useState<number>(0)
-  const [curTrace, setCurTrace] = useState<SortChartData[]>([])
+  const [trace, setTrace] = useState<SortChartData[]>([])
+  const [traceStep, setTraceStep] = useState<number>(0)
   const [capture, setCapture] = useState<SortChartData>({
     data: [],
     comparingIndices: [],
@@ -18,46 +16,84 @@ const App: React.FC = () => {
   })
   const [timeoutIds, setTimeoutIds] = useState<NodeJS.Timeout[]>([])
 
-  const run = () => {
-    // clear running data, before run
-    clearTimeouts()
-    clearCurIndex()
-    clearCurTrace()
+  useEffect(() => {
+    _initDate()
+  }, [])
 
-    const data = generateRamdomData()
-    const trace = selectionSort(data)
-    setCurTrace(trace)
-    runVisualize(trace)
+  const handlePlay = () => {
+    (trace.length - 1 === traceStep)
+      ? _run(trace, 0)
+      : _run(trace, traceStep)
   }
 
-  const clearTimeouts = () => {
+  const handlePause = () => {
+    _stop()
+  }
+
+  const handleRepeat = () => {
+    _stop()
+    _run(trace, 0)
+  }
+
+  const handleShuffle = () => {
+    _stop()
+    _clearData()
+    _initDate()
+  }
+
+  const _run = (trace: SortChartData[], until: number) => {
+    const timeoutIds: NodeJS.Timeout[] = []
+
+    const remainingTrace = trace.slice(until)
+    remainingTrace.forEach((capture, i) => {
+      const timeout = i * (0.5 / speed) * 1000
+
+      const timeoutId = setTimeout((capture, i) => {
+          setCapture(capture)
+          setTraceStep(until + i)
+        },
+        timeout,
+        capture,
+        i)
+
+      timeoutIds.push(timeoutId)
+    })
+
+    setTimeoutIds(timeoutIds)
+  }
+
+  const _stop = () => {
     timeoutIds.forEach(timeoutId =>
       clearTimeout(timeoutId)
     )
+    setTimeoutIds([])
   }
 
-  const clearCurIndex = () => {
-    setCurIndex(0)
+  const _clearData = () => {
+    setTraceStep(0)
   }
 
-  const clearCurTrace = () => {
-    setCurTrace([])
+  const _initDate = () => {
+    const data = _generateRandomData()
+    const trace = _selectionSort(data)
+    setTrace(trace)
+    setCapture(trace[0])
   }
 
-  const generateRamdomData = (): number[] => {
+  const _generateRandomData = (): number[] => {
     const nums: number[] = []
     for (let i = 0; i < NUM_SIZE; i++) {
-      const randomNum = generateRandomNum(MAX_VALUE)
+      const randomNum = _generateRandomNum(MAX_VALUE)
       nums.push(randomNum)
     }
     return nums
   }
 
-  const generateRandomNum = (maxValue: number): number => {
+  const _generateRandomNum = (maxValue: number): number => {
     return Math.round(Math.random() * maxValue)
   }
 
-  const selectionSort = (data: number[]): SortChartData[] => {
+  const _selectionSort = (data: number[]): SortChartData[] => {
     const trace: SortChartData[] = []
 
     const addToTrace = ({
@@ -94,7 +130,7 @@ const App: React.FC = () => {
         })
 
         if (data[pivot] < data[i]) {
-          swap(data, i, pivot)
+          _swap(data, i, pivot)
 
           // add compared trace
           addToTrace({
@@ -126,79 +162,55 @@ const App: React.FC = () => {
     return trace
   }
 
-  const swap = (nums: number[], leftIndex: number, rightIndex: number) => {
+  const _swap = (nums: number[], leftIndex: number, rightIndex: number) => {
     const tempVal = nums[leftIndex]
     nums[leftIndex] = nums[rightIndex]
     nums[rightIndex] = tempVal
   }
 
-  const runVisualize = (trace: SortChartData[]) => {
-    const timeoutIds: NodeJS.Timeout[] = []
-
-    trace.forEach((capture, i) => {
-      // skip until current index
-      if (i < curIndex) {
-        return
-      }
-
-      const timeout = (i - curIndex) * (NORMALIZE_SPEED_VALUE / (speed * trace.length)) * 1000
-      const timeoutId = setTimeout((capture, curIndex) => {
-          setCapture(capture)
-          setCurIndex(curIndex)
-        },
-        timeout,
-        capture,
-        i)
-
-      timeoutIds.push(timeoutId)
-    })
-
-    setTimeoutIds(timeoutIds)
-  }
-
-  const stop = () => {
-    clearTimeouts()
-  }
-
-  const handleSpeedChange = (e: any) => {
-    clearTimeouts()
-
-    let speed = Number(e.target.value)
-
-    setSpeed(speed)
-
-    runVisualize(curTrace)
-  }
-
   return (
     <div className="App">
-      <SortChart sortChartData={capture} />
-
+      <SortChart sortChartData={capture}/>
+      traceStep {traceStep}
+      traceLength {trace.length}
+      timeoutIds {timeoutIds.length}
       <button
-        className={styles.RunButton}
-        onClick={run}
+        onClick={
+          (timeoutIds.length === 0 || trace.length - 1 === traceStep)
+            ? handlePlay
+            : handlePause
+        }
       >
-        Run
+        {
+          (timeoutIds.length === 0 || trace.length - 1 === traceStep)
+            ? 'Play'
+            : 'Pause'
+        }
       </button>
 
       <button
-        className={styles.StopButton}
-        onClick={stop}
+        onClick={handleRepeat}
       >
-        Stop
+        Repeat
       </button>
 
-      <Controller
-        speed={{
-          text: '속도 조절',
-          data: {
-            value: speed,
-            minVal: 1,
-            maxVal: 10
-          },
-          handleChange: handleSpeedChange
-        }}
-      />
+      <button
+        onClick={handleShuffle}
+      >
+        Shuffle
+      </button>
+
+      {/*<Controller*/}
+      {/*  speed={{*/}
+      {/*    text: '속도 조절',*/}
+      {/*    data: {*/}
+      {/*      value: speed,*/}
+      {/*      minVal: 1,*/}
+      {/*      maxVal: 10*/}
+      {/*    },*/}
+      {/*    handleChange: handleSpeedChange*/}
+      {/*  }}*/}
+      {/*/>*/}
     </div>
   )
 }
