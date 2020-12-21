@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './Bar.module.css'
+import React from 'react';
+import styles from './Bar.module.css';
 
 export interface BarProps {
   val: number;
@@ -9,30 +9,27 @@ export interface BarProps {
 }
 
 const Bar: React.FC<BarProps> = ({
-                                   val,
-                                   isComparing,
-                                   isCompared,
-                                   isSorted
-                                 }) => {
-  let className = styles.Bar
+  val,
+  isComparing,
+  isCompared,
+  isSorted,
+}) => {
+  let className = styles.Bar;
   if (isComparing) {
-    className += ` ${styles.BarComparing}`
+    className += ` ${styles.BarComparing}`;
   }
   if (isCompared) {
-    className += ` ${styles.BarCompared}`
+    className += ` ${styles.BarCompared}`;
   }
   if (isSorted) {
-    className += ` ${styles.BarSorting}`
+    className += ` ${styles.BarSorting}`;
   }
 
   return (
-    <div
-      className={className}
-      style={{height: `${val}%`}}
-    >
+    <div className={className} style={{ height: `${val}%` }}>
       {val}
     </div>
-  )
-}
+  );
+};
 
-export default Bar
+export default Bar;
