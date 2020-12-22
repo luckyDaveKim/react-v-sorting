@@ -1,19 +1,14 @@
 import React from 'react';
 import styles from './Bar.module.css';
 
-export interface BarProps {
+export interface IBarProps {
   val: number;
   isComparing: boolean;
   isCompared: boolean;
   isSorted: boolean;
 }
 
-const Bar: React.FC<BarProps> = ({
-  val,
-  isComparing,
-  isCompared,
-  isSorted,
-}) => {
+const Bar: React.FC<IBarProps> = ({ val, isComparing, isCompared, isSorted }) => {
   let className = styles.Bar;
   if (isComparing) {
     className += ` ${styles.BarComparing}`;
