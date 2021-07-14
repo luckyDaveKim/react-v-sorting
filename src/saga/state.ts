@@ -1,26 +1,26 @@
 import { all, call, cancel, delay, flush, fork, put, race, select, take } from 'redux-saga/effects';
-import * as PlayerActions from '../redux/player';
+import * as RunnerActions from '../actions/runner/RunnerAction';
+import * as StateActions from '../actions/state/StateAction';
+import * as ControllerActions from '../actions/conroller/ControllerAction'
 import { closeChannel, subscribe } from './channel';
 import { buffers, EventChannel } from 'redux-saga';
-import { RootState } from '../redux';
+import { RootState } from '../reducers';
 
 export function* start() {
-  yield put(PlayerActions.watch());
+  yield put(RunnerActions.watch());
 }
 
 export function* watcher() {
-  while (yield take(PlayerActions.watch)) {
+  while (yield take(RunnerActions.watch)) {
     try {
-      yield put(PlayerActions.setStatus({ status: 'play' }));
       const worker = yield fork(connectChannel);
-      yield take(PlayerActions.stop);
+      yield take(StateActions.done);
       yield cancel(worker);
     } catch (error) {
       console.error(error);
     } finally {
       yield all([
-        put(PlayerActions.setStatus({ status: 'stop' })),
-        put(PlayerActions.setPlayIndex(0)),
+        put(StateActions.done()),
       ]);
     }
   }
@@ -42,20 +42,21 @@ function* connectChannel() {
         break;
       }
 
-      yield put(PlayerActions.setPlayIndex(store.playIndex + 1));
       const { pause } = yield race({
         timeout: delay(INTERVAL_TIME),
-        pause: take(PlayerActions.pause),
+        pause: take(StateActions.pause),
       });
 
       if (pause) {
-        yield put(PlayerActions.setStatus({ status: 'pause' }));
-        yield take(PlayerActions.restart);
-        yield put(PlayerActions.setStatus({ status: 'play' }));
+        yield put(StateActions.pause());
+        yield take(StateActions.play);
+      } else {
+        yield put(ControllerActions.next());
+        yield put(StateActions.play());
       }
     }
 
-    yield put(PlayerActions.setStatus({ status: 'stop' }));
+    yield put(StateActions.done());
   } catch (error) {
     console.error(error);
   } finally {
@@ -63,4 +64,4 @@ function* connectChannel() {
   }
 }
 
-const getPlayerFromStore = (state: RootState) => state.player;
+const getPlayerFromStore = (state: RootState) => state.controller;

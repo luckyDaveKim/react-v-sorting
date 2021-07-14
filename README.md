@@ -1,3 +1,10 @@
+# react-v-sorting
+정렬 과정을 시각화 하여 보여주는 React 컴포넌트
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

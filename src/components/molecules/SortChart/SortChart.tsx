@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SortChart.module.css';
 import Bar from '../../atoms/Bar/Bar';
-import usePlayer from '../../../hooks/player/usePlayer';
+import useController from '../../../hooks/controller/useController';
 
 export interface ISortChartData {
   nums: number[];
@@ -11,8 +11,8 @@ export interface ISortChartData {
 }
 
 const SortChart: React.FC = () => {
-  const data = usePlayer('data') as ISortChartData[];
-  const playIndex = usePlayer('playIndex') as number;
+  const data = useController('data') as ISortChartData[];
+  const playIndex = useController('playIndex') as number;
   const { nums, comparingIndices, comparedIndices, sortedIndices } = data[playIndex];
 
   return (
