@@ -31,5 +31,19 @@ export default function useControllerActions() {
     dispatch(stateActions.pause());
   }, [dispatch]);
 
-  return { onPlayButton, onPauseButton, onRestButton, onPrevButton, onNextButton };
+  const setSpeedRate = useCallback(
+    speedRate => {
+      dispatch(controllerActions.setSpeedRate(speedRate));
+    },
+    [dispatch]
+  );
+
+  return {
+    onPlayButton,
+    onPauseButton,
+    onRestButton,
+    onPrevButton,
+    onNextButton,
+    setSpeedRate,
+  };
 }

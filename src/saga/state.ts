@@ -29,10 +29,9 @@ export function* watcher() {
 function* connectChannel() {
   let channel: EventChannel<any>;
   try {
-    const INTERVAL_TIME = 200;
+    const DEFAULT_SPEED = 300;
     const buffer = buffers.sliding(1);
-
-    const param = { interval: INTERVAL_TIME, buffer };
+    const param = { interval: 1, buffer };
     channel = yield call(subscribe, param);
 
     while (true) {
@@ -42,8 +41,9 @@ function* connectChannel() {
         break;
       }
 
+      const intervalTime = DEFAULT_SPEED / store.speedRate;
       const { pause } = yield race({
-        timeout: delay(INTERVAL_TIME),
+        timeout: delay(intervalTime),
         pause: take(StateActions.pause),
       });
 

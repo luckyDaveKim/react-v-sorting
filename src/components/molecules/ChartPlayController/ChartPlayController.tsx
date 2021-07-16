@@ -1,7 +1,8 @@
 import React from 'react';
-import {IPlayController, IPlayState} from '../../../utils/playState';
+import { IPlayController, IPlayState } from '../../../utils/playState';
 import useState from '../../../hooks/state/useState';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
+import SpeedController from '../../atoms/SpeedController/SpeedController';
 
 const ChartPlayControllerWrapper: React.FC = () => {
   const status = useState('status') as IPlayState;
@@ -84,6 +85,8 @@ class ChartPlayController
         >
           {this.props.status.getNextButtonLabel()}
         </button>
+
+        <SpeedController />
       </div>
     );
   }
