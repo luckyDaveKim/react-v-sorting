@@ -1,7 +1,27 @@
 import React from 'react';
-import { IPlayController, IPlayState } from '../../../utils/playState';
+import {IPlayController, IPlayState} from '../../../utils/playState';
+import useState from '../../../hooks/state/useState';
+import useControllerActions from '../../../hooks/controller/useControllerAction';
 
-export interface IChartPlayControlProps {
+const ChartPlayControllerWrapper: React.FC = () => {
+  const status = useState('status') as IPlayState;
+  const controllerActions = useControllerActions();
+
+  return (
+    <div>
+      <ChartPlayController
+        status={status}
+        onPlayButton={controllerActions.onPlayButton}
+        onPauseButton={controllerActions.onPauseButton}
+        onRestButton={controllerActions.onRestButton}
+        onPrevButton={controllerActions.onPrevButton}
+        onNextButton={controllerActions.onNextButton}
+      />
+    </div>
+  );
+};
+
+interface IChartPlayControlProps {
   status: IPlayState;
 
   onPlayButton(): void;
@@ -15,7 +35,7 @@ export interface IChartPlayControlProps {
   onNextButton(): void;
 }
 
-export class ChartPlayController
+class ChartPlayController
   extends React.Component<IChartPlayControlProps, any>
   implements IPlayController {
   public onPlayButton(): void {
@@ -69,4 +89,4 @@ export class ChartPlayController
   }
 }
 
-export default ChartPlayController;
+export default ChartPlayControllerWrapper;

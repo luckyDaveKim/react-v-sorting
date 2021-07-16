@@ -1,5 +1,3 @@
-import { ChartPlayController } from '../components/molecules/ChartPlayController/ChartPlayController';
-
 const playLabel = 'Play';
 const pauseLabel = '||';
 const resetLabel = 'Rest';
@@ -19,11 +17,11 @@ export interface IPlayController {
 }
 
 export interface IPlayState {
-  onPlayButton(player: ChartPlayController): void;
+  onPlayButton(player: IPlayController): void;
 
-  onPrevButton(player: ChartPlayController): void;
+  onPrevButton(player: IPlayController): void;
 
-  onNextButton(player: ChartPlayController): void;
+  onNextButton(player: IPlayController): void;
 
   getPlayButtonLabel(): string;
 
