@@ -1,11 +1,12 @@
 import React from 'react';
 import { IPlayController, IPlayState } from '../../../utils/playState';
-import useState from '../../../hooks/state/useState';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
 import SpeedController from '../../atoms/SpeedController/SpeedController';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../reducers';
 
 const ChartPlayControllerWrapper: React.FC = () => {
-  const status = useState('status') as IPlayState;
+  const status = useSelector((state: RootState) => state.state.status);
   const controllerActions = useControllerActions();
 
   return (

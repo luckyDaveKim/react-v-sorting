@@ -1,7 +1,18 @@
-import { all, call, cancel, delay, flush, fork, put, race, select, take } from 'redux-saga/effects';
+import {
+  all,
+  call,
+  cancel,
+  delay,
+  flush,
+  fork,
+  put,
+  race,
+  select,
+  take,
+} from 'redux-saga/effects';
 import * as RunnerActions from '../actions/runner/RunnerAction';
 import * as StateActions from '../actions/state/StateAction';
-import * as ControllerActions from '../actions/conroller/ControllerAction'
+import * as ChartDataActions from '../actions/chartdata/ChartDataAction';
 import { closeChannel, subscribe } from './channel';
 import { buffers, EventChannel } from 'redux-saga';
 import { RootState } from '../reducers';
@@ -19,9 +30,7 @@ export function* watcher() {
     } catch (error) {
       console.error(error);
     } finally {
-      yield all([
-        put(StateActions.done()),
-      ]);
+      yield all([put(StateActions.done())]);
     }
   }
 }
@@ -51,7 +60,7 @@ function* connectChannel() {
         yield put(StateActions.pause());
         yield take(StateActions.play);
       } else {
-        yield put(ControllerActions.next());
+        yield put(ChartDataActions.nextPlayIndex());
         yield put(StateActions.play());
       }
     }
@@ -64,4 +73,4 @@ function* connectChannel() {
   }
 }
 
-const getPlayerFromStore = (state: RootState) => state.controller;
+const getPlayerFromStore = (state: RootState) => state.chartData;

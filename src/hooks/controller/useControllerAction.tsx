@@ -1,39 +1,37 @@
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { stateActions } from '../../actions/state/StateAction';
-import { controllerActions } from '../../actions/conroller/ControllerAction';
+import { chartDataActions } from '../../actions/chartdata/ChartDataAction';
 
 export default function useControllerActions() {
   const dispatch = useDispatch();
 
   const onPlayButton = useCallback(() => {
-    dispatch(controllerActions.play());
     dispatch(stateActions.play());
   }, [dispatch]);
 
   const onPauseButton = useCallback(() => {
-    dispatch(controllerActions.pause());
     dispatch(stateActions.pause());
   }, [dispatch]);
 
   const onRestButton = useCallback(() => {
-    dispatch(controllerActions.reset());
+    dispatch(chartDataActions.initPlayIndex());
     dispatch(stateActions.play());
   }, [dispatch]);
 
   const onPrevButton = useCallback(() => {
-    dispatch(controllerActions.prev());
+    dispatch(chartDataActions.prevPlayIndex());
     dispatch(stateActions.pause());
   }, [dispatch]);
 
   const onNextButton = useCallback(() => {
-    dispatch(controllerActions.next());
+    dispatch(chartDataActions.nextPlayIndex());
     dispatch(stateActions.pause());
   }, [dispatch]);
 
   const setSpeedRate = useCallback(
     speedRate => {
-      dispatch(controllerActions.setSpeedRate(speedRate));
+      dispatch(chartDataActions.setSpeedRate(speedRate));
     },
     [dispatch]
   );

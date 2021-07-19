@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import state from './state';
-import controller from './controller';
+import chartData from './chartData';
 
 const rootReducer = combineReducers({
   state,
-  controller,
+  chartData,
 });
 
 export default rootReducer;
