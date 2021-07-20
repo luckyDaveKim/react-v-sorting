@@ -14,6 +14,7 @@ const SpeedController: React.FC = () => {
       <option value={1}>x1.0</option>
       <option value={1.5}>x1.5</option>
       <option value={2}>x2.0</option>
+      <option value={99}>x99</option>
     </select>
   );
 };
