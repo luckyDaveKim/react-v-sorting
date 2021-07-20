@@ -20,13 +20,13 @@ export default function useControllerActions() {
   }, [dispatch]);
 
   const onPrevButton = useCallback(() => {
-    dispatch(chartDataActions.prevPlayIndex());
     dispatch(stateActions.pause());
+    dispatch(chartDataActions.prevPlayIndex());
   }, [dispatch]);
 
   const onNextButton = useCallback(() => {
-    dispatch(chartDataActions.nextPlayIndex());
     dispatch(stateActions.pause());
+    dispatch(chartDataActions.nextPlayIndex());
   }, [dispatch]);
 
   const setSpeedRate = useCallback(
@@ -38,10 +38,9 @@ export default function useControllerActions() {
 
   const changeAlgorithm = useCallback(
     algorithm => {
+      dispatch(stateActions.stop());
       dispatch(chartDataActions.changeAlgorithm(algorithm));
       dispatch(chartDataActions.initData());
-      dispatch(chartDataActions.initPlayIndex());
-      dispatch(stateActions.stop());
     },
     [dispatch]
   );
