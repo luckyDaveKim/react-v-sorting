@@ -23,7 +23,7 @@ type ChartDataState = {
 export type ChartDataKey = keyof ChartDataState;
 
 const initialState: ChartDataState = {
-  data: generateChartData({ size: 10 }),
+  data: generateChartData({ size: 10, algorithm: selectionSort }),
   playIndex: 0,
   speedRate: 1,
   algorithm: selectionSort,
@@ -54,7 +54,7 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
       return { ...state, algorithm: action.payload };
     },
     [INIT_DATA]: state => {
-      return { ...state, data: generateChartData({ size: 10 }) };
+      return { ...state, playIndex: 0, data: generateChartData({ size: 10, algorithm: state.algorithm }) };
     },
   }
 );

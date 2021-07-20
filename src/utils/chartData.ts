@@ -1,5 +1,5 @@
 import { ISortChartData } from '../components/molecules/SortChart/SortChart';
-import selectionSort from './algorithms/selectionSort';
+import { ISort } from './algorithms/ISort';
 
 const generateRandomNums = (size: number, maxValue: number) => {
   const nums: number[] = [];
@@ -17,12 +17,14 @@ const generateRandomNum = (maxValue: number): number => {
 interface IRandomChartDataProps {
   size: number;
   maxValue?: number;
+  algorithm: ISort;
 }
 
 export default function generateChartData({
   size,
   maxValue = 100,
+  algorithm,
 }: IRandomChartDataProps): ISortChartData[] {
   const nums = generateRandomNums(size, maxValue);
-  return selectionSort(nums);
+  return algorithm(nums);
 }
