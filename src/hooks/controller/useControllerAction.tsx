@@ -45,6 +45,15 @@ export default function useControllerActions() {
     [dispatch]
   );
 
+  const changeSize = useCallback(
+    size => {
+      dispatch(stateActions.stop());
+      dispatch(chartDataActions.changeSize(size));
+      dispatch(chartDataActions.initData());
+    },
+    [dispatch]
+  );
+
   return {
     onPlayButton,
     onPauseButton,
@@ -53,5 +62,6 @@ export default function useControllerActions() {
     onNextButton,
     setSpeedRate,
     changeAlgorithm,
+    changeSize,
   };
 }

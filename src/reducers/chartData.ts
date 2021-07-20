@@ -3,6 +3,7 @@ import generateChartData from '../utils/chartData';
 import { ISortChartData } from '../components/molecules/SortChart/SortChart';
 import {
   CHANGE_ALGORITHM,
+  CHANGE_SIZE,
   INIT_DATA,
   INIT_PLAY_INDEX,
   NEXT_PLAY_INDEX,
@@ -19,6 +20,7 @@ type ChartDataState = {
   playIndex: number;
   speedRate: number;
   algorithm: ISort;
+  size: number;
 };
 export type ChartDataKey = keyof ChartDataState;
 
@@ -27,6 +29,7 @@ const initialState: ChartDataState = {
   playIndex: 0,
   speedRate: 1,
   algorithm: selectionSort,
+  size: 10,
 };
 
 /* Reducer */
@@ -53,8 +56,18 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
     [CHANGE_ALGORITHM]: (state, action) => {
       return { ...state, algorithm: action.payload };
     },
+    [CHANGE_SIZE]: (state, action) => {
+      return { ...state, size: action.payload };
+    },
     [INIT_DATA]: state => {
-      return { ...state, playIndex: 0, data: generateChartData({ size: 10, algorithm: state.algorithm }) };
+      return {
+        ...state,
+        playIndex: 0,
+        data: generateChartData({
+          size: state.size,
+          algorithm: state.algorithm,
+        }),
+      };
     },
   }
 );
