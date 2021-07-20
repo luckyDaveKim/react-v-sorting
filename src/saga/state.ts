@@ -1,5 +1,4 @@
 import {
-  all,
   call,
   cancel,
   delay,
@@ -29,8 +28,6 @@ export function* watcher() {
       yield cancel(worker);
     } catch (error) {
       console.error(error);
-    } finally {
-      yield all([put(StateActions.done())]);
     }
   }
 }
@@ -61,7 +58,6 @@ function* connectChannel() {
         yield take(StateActions.play);
       } else {
         yield put(ChartDataActions.nextPlayIndex());
-        yield put(StateActions.play());
       }
     }
 

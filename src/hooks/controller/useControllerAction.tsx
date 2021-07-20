@@ -36,6 +36,16 @@ export default function useControllerActions() {
     [dispatch]
   );
 
+  const changeAlgorithm = useCallback(
+    algorithm => {
+      dispatch(chartDataActions.changeAlgorithm(algorithm));
+      dispatch(chartDataActions.initData());
+      dispatch(chartDataActions.initPlayIndex());
+      dispatch(stateActions.stop());
+    },
+    [dispatch]
+  );
+
   return {
     onPlayButton,
     onPauseButton,
@@ -43,5 +53,6 @@ export default function useControllerActions() {
     onPrevButton,
     onNextButton,
     setSpeedRate,
+    changeAlgorithm,
   };
 }
