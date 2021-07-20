@@ -1,9 +1,10 @@
 import React from 'react';
 import { IPlayController, IPlayState } from '../../../utils/playState';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
-import SpeedController from '../../atoms/SpeedController/SpeedController';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button } from 'react-bootstrap';
 
 const ChartPlayControllerWrapper: React.FC = () => {
   const status = useSelector((state: RootState) => state.state.status);
@@ -63,31 +64,37 @@ class ChartPlayController
   render() {
     return (
       <div>
-        <button
+        <Button
+          variant={'outline-primary'}
+          size={'sm'}
+          className={'m-1'}
           onClick={() => {
             this.props.status.onPrevButton(this);
           }}
         >
-          {this.props.status.getPrevButtonLabel()}
-        </button>
+          <FontAwesomeIcon icon={this.props.status.getPrevButtonIcon()} />
+        </Button>
 
-        <button
+        <Button
+          variant={'primary'}
+          className={'m-1'}
           onClick={() => {
             this.props.status.onPlayButton(this);
           }}
         >
-          {this.props.status.getPlayButtonLabel()}
-        </button>
+          <FontAwesomeIcon icon={this.props.status.getPlayButtonIcon()} />
+        </Button>
 
-        <button
+        <Button
+          variant={'outline-primary'}
+          size={'sm'}
+          className={'m-1'}
           onClick={() => {
             this.props.status.onNextButton(this);
           }}
         >
-          {this.props.status.getNextButtonLabel()}
-        </button>
-
-        <SpeedController />
+          <FontAwesomeIcon icon={this.props.status.getNextButtonIcon()} />
+        </Button>
       </div>
     );
   }

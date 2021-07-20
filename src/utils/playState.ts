@@ -1,8 +1,11 @@
-const playLabel = 'Play';
-const pauseLabel = '||';
-const resetLabel = 'Rest';
-const prevLabel = '<';
-const nextLabel = '>';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import {
+  faChevronLeft,
+  faChevronRight,
+  faPause,
+  faPlay,
+  faRedo,
+} from '@fortawesome/free-solid-svg-icons';
 
 export interface IPlayController {
   onPlayButton(): void;
@@ -23,11 +26,11 @@ export interface IPlayState {
 
   onNextButton(player: IPlayController): void;
 
-  getPlayButtonLabel(): string;
+  getPlayButtonIcon(): IconProp;
 
-  getPrevButtonLabel(): string;
+  getPrevButtonIcon(): IconProp;
 
-  getNextButtonLabel(): string;
+  getNextButtonIcon(): IconProp;
 }
 
 export class PlayState implements IPlayState {
@@ -43,16 +46,16 @@ export class PlayState implements IPlayState {
     player.onNextButton();
   }
 
-  getPlayButtonLabel(): string {
-    return pauseLabel;
+  getPlayButtonIcon(): IconProp {
+    return faPause;
   }
 
-  getPrevButtonLabel(): string {
-    return prevLabel;
+  getPrevButtonIcon(): IconProp {
+    return faChevronLeft;
   }
 
-  getNextButtonLabel(): string {
-    return nextLabel;
+  getNextButtonIcon(): IconProp {
+    return faChevronRight;
   }
 }
 
@@ -69,16 +72,16 @@ export class PauseState implements IPlayState {
     player.onNextButton();
   }
 
-  getPlayButtonLabel(): string {
-    return playLabel;
+  getPlayButtonIcon(): IconProp {
+    return faPlay;
   }
 
-  getPrevButtonLabel(): string {
-    return prevLabel;
+  getPrevButtonIcon(): IconProp {
+    return faChevronLeft;
   }
 
-  getNextButtonLabel(): string {
-    return nextLabel;
+  getNextButtonIcon(): IconProp {
+    return faChevronRight;
   }
 }
 
@@ -95,16 +98,16 @@ export class DoneState implements IPlayState {
     player.onNextButton();
   }
 
-  getPlayButtonLabel(): string {
-    return resetLabel;
+  getPlayButtonIcon(): IconProp {
+    return faRedo;
   }
 
-  getPrevButtonLabel(): string {
-    return prevLabel;
+  getPrevButtonIcon(): IconProp {
+    return faChevronLeft;
   }
 
-  getNextButtonLabel(): string {
-    return nextLabel;
+  getNextButtonIcon(): IconProp {
+    return faChevronRight;
   }
 }
 
@@ -121,15 +124,15 @@ export class StopState implements IPlayState {
     player.onNextButton();
   }
 
-  getPlayButtonLabel(): string {
-    return playLabel;
+  getPlayButtonIcon(): IconProp {
+    return faPlay;
   }
 
-  getPrevButtonLabel(): string {
-    return prevLabel;
+  getPrevButtonIcon(): IconProp {
+    return faChevronLeft;
   }
 
-  getNextButtonLabel(): string {
-    return nextLabel;
+  getNextButtonIcon(): IconProp {
+    return faChevronRight;
   }
 }

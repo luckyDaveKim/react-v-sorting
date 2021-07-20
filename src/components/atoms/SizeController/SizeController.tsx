@@ -1,5 +1,6 @@
 import React from 'react';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
+import { Form } from 'react-bootstrap';
 
 const SizeController: React.FC = () => {
   const controllerActions = useControllerActions();
@@ -9,14 +10,14 @@ const SizeController: React.FC = () => {
   };
 
   return (
-    <select onChange={onChange} defaultValue={10}>
+    <Form.Control as="select" custom defaultValue={10} onChange={onChange}>
       <option value={5}>5</option>
       <option value={10}>10</option>
       <option value={25}>25</option>
       <option value={50}>50</option>
       <option value={75}>75</option>
       <option value={100}>100</option>
-    </select>
+    </Form.Control>
   );
 };
 

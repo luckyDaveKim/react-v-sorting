@@ -2,6 +2,7 @@ import React from 'react';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
 import selectionSort from '../../../utils/algorithms/selectionSort';
 import bubbleSort from '../../../utils/algorithms/bubbleSort';
+import { Form } from 'react-bootstrap';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
@@ -24,10 +25,15 @@ const AlgorithmController: React.FC = () => {
   };
 
   return (
-    <select onChange={onChange} defaultValue={'selectionSort'}>
+    <Form.Control
+      as="select"
+      custom
+      defaultValue={'selectionSort'}
+      onChange={onChange}
+    >
       <option value={'selectionSort'}>Selection Sort</option>
       <option value={'bubbleSort'}>Bubble Sort</option>
-    </select>
+    </Form.Control>
   );
 };
 
