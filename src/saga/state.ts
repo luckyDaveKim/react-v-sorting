@@ -24,7 +24,7 @@ export function* watcher() {
   while (yield take(RunnerActions.watch)) {
     try {
       const worker = yield fork(connectChannel);
-      yield take(StateActions.done);
+      yield take([StateActions.stop, StateActions.done]);
       yield cancel(worker);
     } catch (error) {
       console.error(error);
