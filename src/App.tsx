@@ -5,11 +5,12 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import rootReducer from './reducers';
 import rootSaga from './saga';
 import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
-  compose(applyMiddleware(sagaMiddleware))
+  compose(applyMiddleware(sagaMiddleware, logger))
 );
 sagaMiddleware.run(rootSaga);
 
