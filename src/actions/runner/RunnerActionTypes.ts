@@ -1,1 +1,1 @@
-export const WATCH = 'PLAYER/WATCH'; // saga watch
+export const WATCH = 'RUNNER/WATCH'; // saga watch
