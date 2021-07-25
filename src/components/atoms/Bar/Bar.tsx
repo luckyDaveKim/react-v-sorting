@@ -3,18 +3,33 @@ import styles from './Bar.module.css';
 
 export interface IBarProps {
   val: number;
-  isComparing: boolean;
-  isCompared: boolean;
+  isStateA: boolean;
+  isStateB: boolean;
+  isStateC: boolean;
+  isStateD: boolean;
   isSorted: boolean;
 }
 
-const Bar: React.FC<IBarProps> = ({ val, isComparing, isCompared, isSorted }) => {
+const Bar: React.FC<IBarProps> = ({
+  val,
+  isStateA,
+  isStateB,
+  isStateC,
+  isStateD,
+  isSorted,
+}) => {
   let className = styles.Bar;
-  if (isComparing) {
-    className += ` ${styles.BarComparing}`;
+  if (isStateA) {
+    className += ` ${styles.BarStateA}`;
   }
-  if (isCompared) {
-    className += ` ${styles.BarCompared}`;
+  if (isStateB) {
+    className += ` ${styles.BarStateB}`;
+  }
+  if (isStateC) {
+    className += ` ${styles.BarStateC}`;
+  }
+  if (isStateD) {
+    className += ` ${styles.BarStateD}`;
   }
   if (isSorted) {
     className += ` ${styles.BarSorting}`;

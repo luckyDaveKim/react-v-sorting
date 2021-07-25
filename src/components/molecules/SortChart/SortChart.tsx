@@ -6,8 +6,10 @@ import { RootState } from '../../../reducers';
 
 export interface ISortChartData {
   nums: number[];
-  comparingIndices: number[];
-  comparedIndices: number[];
+  groupA: number[];
+  groupB: number[];
+  groupC: number[];
+  groupD: number[];
   sortedIndices: number[];
 }
 
@@ -16,7 +18,7 @@ const SortChart: React.FC = () => {
   const playIndex = useSelector(
     (state: RootState) => state.chartData.playIndex
   );
-  const { nums, comparingIndices, comparedIndices, sortedIndices } = data[
+  const { nums, groupA, groupB, groupC, groupD, sortedIndices } = data[
     playIndex
   ];
 
@@ -27,8 +29,10 @@ const SortChart: React.FC = () => {
           <Bar
             key={i}
             val={num}
-            isComparing={comparingIndices.includes(i)}
-            isCompared={comparedIndices.includes(i)}
+            isStateA={groupA.includes(i)}
+            isStateB={groupB.includes(i)}
+            isStateC={groupC.includes(i)}
+            isStateD={groupD.includes(i)}
             isSorted={sortedIndices.includes(i)}
           />
         );

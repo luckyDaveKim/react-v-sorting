@@ -9,11 +9,19 @@
   align-items: center;
 }
 
-.BarComparing {
+.BarStateA {
   background-color: var(--red);
 }
 
-.BarCompared {
+.BarStateB {
+  background-color: var(--yellow);
+}
+
+.BarStateC {
+  background-color: var(--orange);
+}
+
+.BarStateD {
   background-color: var(--green);
 }
 

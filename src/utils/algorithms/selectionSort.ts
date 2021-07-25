@@ -1,60 +1,45 @@
-import { ISortChartData } from '../../components/molecules/SortChart/SortChart';
 import { swap } from './helper';
 import { ISort } from './ISort';
+import { TraceManager } from './trace';
 
 const selectionSort: ISort = nums => {
-  const trace: ISortChartData[] = [];
-
-  // add init trace
-  trace.push({
-    nums: [...nums],
-    comparingIndices: [],
-    comparedIndices: [],
-    sortedIndices: [],
-  });
+  // Init trace manager
+  const traceManager = new TraceManager(nums);
 
   const dataSize = nums.length;
   for (let i = 0; i < dataSize - 1; i++) {
-    for (let pivot = i + 1; pivot < dataSize; pivot++) {
-      // add comparing trace
-      trace.push({
-        nums: [...nums],
-        comparingIndices: [i, pivot],
-        comparedIndices: [],
-        sortedIndices: [...trace[trace.length - 1].sortedIndices], // add last sortedIndices
-      });
+    let minIndex = i;
 
-      if (nums[pivot] < nums[i]) {
-        swap(nums, i, pivot);
+    // Set current min
+    traceManager.add(nums, [...traceManager.getLastSorted()], [minIndex]);
 
-        // add compared trace
-        trace.push({
-          nums: [...nums],
-          comparingIndices: [i, pivot],
-          comparedIndices: [i, pivot],
-          sortedIndices: [...trace[trace.length - 1].sortedIndices], // add last sortedIndices
-        });
+    for (let j = i + 1; j < dataSize; j++) {
+      // Comparing
+      traceManager.add(
+        nums,
+        [...traceManager.getLastSorted()],
+        [],
+        [minIndex, j]
+      );
+
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j;
+
+        // Set current min
+        traceManager.add(nums, [...traceManager.getLastSorted()], [minIndex]);
       }
     }
 
-    // add partial sorted trace
-    trace.push({
-      nums: [...nums],
-      comparingIndices: [],
-      comparedIndices: [],
-      sortedIndices: [...trace[trace.length - 1].sortedIndices, i], // add last sortedIndices with current index
-    });
+    swap(nums, i, minIndex);
+
+    // Partial sorted trace
+    traceManager.add(nums, [...traceManager.getLastSorted(), i]);
   }
 
-  // add finish sorted trace
-  trace.push({
-    nums: [...nums],
-    comparingIndices: [],
-    comparedIndices: [],
-    sortedIndices: [...trace[trace.length - 1].sortedIndices, dataSize - 1], // add all indices
-  });
+  // Last sorted trace
+  traceManager.add(nums, [...traceManager.getLastSorted(), dataSize - 1]);
 
-  return trace;
+  return traceManager.getTrace();
 };
 
 export default selectionSort;

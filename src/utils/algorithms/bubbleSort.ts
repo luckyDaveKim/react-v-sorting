@@ -1,60 +1,38 @@
-import { ISortChartData } from '../../components/molecules/SortChart/SortChart';
 import { swap } from './helper';
 import { ISort } from './ISort';
+import { TraceManager } from './trace';
 
 const bubbleSort: ISort = nums => {
-  const trace: ISortChartData[] = [];
-
-  // add init trace
-  trace.push({
-    nums: [...nums],
-    comparingIndices: [],
-    comparedIndices: [],
-    sortedIndices: [],
-  });
+  // Init trace manager
+  const traceManager = new TraceManager(nums);
 
   const dataSize = nums.length;
   for (let i = 1; i < dataSize; i++) {
-    for (let pivot = 0; pivot < dataSize - i; pivot++) {
-      // add comparing trace
-      trace.push({
-        nums: [...nums],
-        comparingIndices: [pivot, pivot + 1],
-        comparedIndices: [],
-        sortedIndices: [...trace[trace.length - 1].sortedIndices], // add last sortedIndices
-      });
+    for (let j = 0; j < dataSize - i; j++) {
+      // Comparing
+      traceManager.add(nums, [...traceManager.getLastSorted()], [j, j + 1]);
 
-      if (nums[pivot] > nums[pivot + 1]) {
-        swap(nums, pivot, pivot + 1);
+      if (nums[j] > nums[j + 1]) {
+        swap(nums, j, j + 1);
 
-        // add compared trace
-        trace.push({
-          nums: [...nums],
-          comparingIndices: [pivot, pivot + 1],
-          comparedIndices: [pivot, pivot + 1],
-          sortedIndices: [...trace[trace.length - 1].sortedIndices], // add last sortedIndices
-        });
+        // Swap
+        traceManager.add(
+          nums,
+          [...traceManager.getLastSorted()],
+          [],
+          [j, j + 1]
+        );
       }
     }
 
-    // add partial sorted trace
-    trace.push({
-      nums: [...nums],
-      comparingIndices: [],
-      comparedIndices: [],
-      sortedIndices: [...trace[trace.length - 1].sortedIndices, dataSize - i], // add last sortedIndices with current index
-    });
+    // Partial sorted trace
+    traceManager.add(nums, [...traceManager.getLastSorted(), dataSize - i]);
   }
 
-  // add finish sorted trace
-  trace.push({
-    nums: [...nums],
-    comparingIndices: [],
-    comparedIndices: [],
-    sortedIndices: [...trace[trace.length - 1].sortedIndices, 0], // add all indices
-  });
+  // Last sorted trace
+  traceManager.add(nums, [...traceManager.getLastSorted(), 0]);
 
-  return trace;
+  return traceManager.getTrace();
 };
 
 export default bubbleSort;
