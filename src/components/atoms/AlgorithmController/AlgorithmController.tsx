@@ -1,8 +1,9 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
 import selectionSort from '../../../utils/algorithms/selectionSort';
 import bubbleSort from '../../../utils/algorithms/bubbleSort';
-import { Form } from 'react-bootstrap';
+import insertionSort from '../../../utils/algorithms/insertionSort';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
@@ -16,6 +17,9 @@ const AlgorithmController: React.FC = () => {
         break;
       case 'bubbleSort':
         algorithm = bubbleSort;
+        break;
+      case 'insertionSort':
+        algorithm = insertionSort;
         break;
       default:
         return;
@@ -33,6 +37,7 @@ const AlgorithmController: React.FC = () => {
     >
       <option value={'selectionSort'}>Selection Sort</option>
       <option value={'bubbleSort'}>Bubble Sort</option>
+      <option value={'insertionSort'}>Insertion Sort</option>
     </Form.Control>
   );
 };
