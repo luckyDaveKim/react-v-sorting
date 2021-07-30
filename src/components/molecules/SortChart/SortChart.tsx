@@ -23,7 +23,7 @@ const SortChart: React.FC = () => {
   ];
 
   return (
-    <div className={styles.Chart}>
+    <ul className={styles.Chart}>
       {nums.map((num, i) => {
         return (
           <Bar
@@ -37,7 +37,7 @@ const SortChart: React.FC = () => {
           />
         );
       })}
-    </div>
+    </ul>
   );
 };
 

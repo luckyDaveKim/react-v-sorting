@@ -5,14 +5,14 @@ import { Col, Container, Row } from 'react-bootstrap';
 
 const SortVisualizer: React.FC = () => {
   return (
-    <Container>
+    <Container fluid>
       <Row>
-        <Col md={12}>
+        <Col>
           <SortChart />
         </Col>
       </Row>
       <Row>
-        <Col md={12}>
+        <Col>
           <ChartController />
         </Col>
       </Row>

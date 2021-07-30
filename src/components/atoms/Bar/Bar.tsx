@@ -19,6 +19,11 @@ const Bar: React.FC<IBarProps> = ({
   isSorted,
 }) => {
   let className = styles.Bar;
+
+  if (isStateA || isStateB || isStateC || isStateD) {
+    className += ` ${styles.SelectedBar}`;
+  }
+
   if (isStateA) {
     className += ` ${styles.BarStateA}`;
   }
@@ -35,11 +40,7 @@ const Bar: React.FC<IBarProps> = ({
     className += ` ${styles.BarSorting}`;
   }
 
-  return (
-    <div className={className} style={{ height: `${val}%` }}>
-      {val}
-    </div>
-  );
+  return <li className={className} style={{ height: `${val}%` }} />;
 };
 
 export default Bar;

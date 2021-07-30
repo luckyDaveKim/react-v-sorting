@@ -1,12 +1,11 @@
 @import '../../../styles/color.css';
 
 .Chart {
-  width: 800px;
   min-height: 400px;
   height: 50vh;
   background-color: var(--white);
   padding: 1rem;
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
+  list-style: none;
 }

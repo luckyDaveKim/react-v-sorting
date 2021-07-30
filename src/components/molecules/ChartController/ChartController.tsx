@@ -9,13 +9,13 @@ const ChartController: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col md={2}>
+        <Col md={3}>
           <ChartPlayController />
         </Col>
         <Col md={2}>
           <SpeedController />
         </Col>
-        <Col md={2}>
+        <Col md={3}>
           <AlgorithmController />
         </Col>
         <Col md={2}>

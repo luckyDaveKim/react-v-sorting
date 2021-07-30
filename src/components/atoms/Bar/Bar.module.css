@@ -1,12 +1,17 @@
 @import '../../../styles/color.css';
 
 .Bar {
-  width: 100px;
+  -webkit-transition: margin 0.2s ease-in-out;
+  -moz-transition: margin 0.2s ease-in-out;
+  -o-transition: margin 0.2s ease-in-out;
+  transition: margin 0.2s ease-in-out;
+  width: 100%;
   background-color: var(--gray);
   margin: 1px;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
+}
+
+.SelectedBar {
+  margin: 0 0.7rem;
 }
 
 .BarStateA {
