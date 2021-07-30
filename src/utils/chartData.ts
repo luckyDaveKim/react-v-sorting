@@ -11,7 +11,7 @@ const generateRandomNums = (size: number, maxValue: number) => {
 };
 
 const generateRandomNum = (maxValue: number): number => {
-  return Math.round(Math.random() * maxValue);
+  return Math.floor(Math.random() * maxValue) + 1;
 };
 
 interface IRandomChartDataProps {
