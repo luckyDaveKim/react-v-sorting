@@ -8,15 +8,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export interface IPlayController {
-  onPlayButton(): void;
+  onPlay(): void;
 
-  onPauseButton(): void;
+  onPause(): void;
 
-  onRestButton(): void;
+  onRest(): void;
 
-  onPrevButton(): void;
+  onPrev(): void;
 
-  onNextButton(): void;
+  onNext(): void;
 }
 
 export interface IPlayState {
@@ -35,15 +35,15 @@ export interface IPlayState {
 
 export class PlayState implements IPlayState {
   onPlayButton(player: IPlayController): void {
-    player.onPauseButton();
+    player.onPause();
   }
 
   onPrevButton(player: IPlayController): void {
-    player.onPrevButton();
+    player.onPrev();
   }
 
   onNextButton(player: IPlayController): void {
-    player.onNextButton();
+    player.onNext();
   }
 
   getPlayButtonIcon(): IconProp {
@@ -61,15 +61,15 @@ export class PlayState implements IPlayState {
 
 export class PauseState implements IPlayState {
   onPlayButton(player: IPlayController): void {
-    player.onPlayButton();
+    player.onPlay();
   }
 
   onPrevButton(player: IPlayController): void {
-    player.onPrevButton();
+    player.onPrev();
   }
 
   onNextButton(player: IPlayController): void {
-    player.onNextButton();
+    player.onNext();
   }
 
   getPlayButtonIcon(): IconProp {
@@ -87,15 +87,15 @@ export class PauseState implements IPlayState {
 
 export class DoneState implements IPlayState {
   onPlayButton(player: IPlayController): void {
-    player.onRestButton();
+    player.onRest();
   }
 
   onPrevButton(player: IPlayController): void {
-    player.onPrevButton();
+    player.onPrev();
   }
 
   onNextButton(player: IPlayController): void {
-    player.onNextButton();
+    player.onNext();
   }
 
   getPlayButtonIcon(): IconProp {
@@ -113,15 +113,15 @@ export class DoneState implements IPlayState {
 
 export class StopState implements IPlayState {
   onPlayButton(player: IPlayController): void {
-    player.onPlayButton();
+    player.onPlay();
   }
 
   onPrevButton(player: IPlayController): void {
-    player.onPrevButton();
+    player.onPrev();
   }
 
   onNextButton(player: IPlayController): void {
-    player.onNextButton();
+    player.onNext();
   }
 
   getPlayButtonIcon(): IconProp {

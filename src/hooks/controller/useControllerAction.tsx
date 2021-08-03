@@ -6,25 +6,25 @@ import { chartDataActions } from '../../actions/chartdata/ChartDataAction';
 export default function useControllerActions() {
   const dispatch = useDispatch();
 
-  const onPlayButton = useCallback(() => {
+  const onPlay = useCallback(() => {
     dispatch(stateActions.play());
   }, [dispatch]);
 
-  const onPauseButton = useCallback(() => {
+  const onPause = useCallback(() => {
     dispatch(stateActions.pause());
   }, [dispatch]);
 
-  const onRestButton = useCallback(() => {
+  const onRest = useCallback(() => {
     dispatch(chartDataActions.initPlayIndex());
     dispatch(stateActions.play());
   }, [dispatch]);
 
-  const onPrevButton = useCallback(() => {
+  const onPrev = useCallback(() => {
     dispatch(stateActions.pause());
     dispatch(chartDataActions.prevPlayIndex());
   }, [dispatch]);
 
-  const onNextButton = useCallback(() => {
+  const onNext = useCallback(() => {
     dispatch(stateActions.pause());
     dispatch(chartDataActions.nextPlayIndex());
   }, [dispatch]);
@@ -55,11 +55,11 @@ export default function useControllerActions() {
   );
 
   return {
-    onPlayButton,
-    onPauseButton,
-    onRestButton,
-    onPrevButton,
-    onNextButton,
+    onPlay,
+    onPause,
+    onRest,
+    onPrev,
+    onNext,
     setSpeedRate,
     changeAlgorithm,
     changeSize,

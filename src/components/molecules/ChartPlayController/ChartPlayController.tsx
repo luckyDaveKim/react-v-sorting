@@ -14,11 +14,11 @@ const ChartPlayControllerWrapper: React.FC = () => {
     <div>
       <ChartPlayController
         status={status}
-        onPlayButton={controllerActions.onPlayButton}
-        onPauseButton={controllerActions.onPauseButton}
-        onRestButton={controllerActions.onRestButton}
-        onPrevButton={controllerActions.onPrevButton}
-        onNextButton={controllerActions.onNextButton}
+        onPlay={controllerActions.onPlay}
+        onPause={controllerActions.onPause}
+        onRest={controllerActions.onRest}
+        onPrev={controllerActions.onPrev}
+        onNext={controllerActions.onNext}
       />
     </div>
   );
@@ -27,38 +27,38 @@ const ChartPlayControllerWrapper: React.FC = () => {
 interface IChartPlayControlProps {
   status: IPlayState;
 
-  onPlayButton(): void;
+  onPlay(): void;
 
-  onPauseButton(): void;
+  onPause(): void;
 
-  onRestButton(): void;
+  onRest(): void;
 
-  onPrevButton(): void;
+  onPrev(): void;
 
-  onNextButton(): void;
+  onNext(): void;
 }
 
 class ChartPlayController
   extends React.Component<IChartPlayControlProps, any>
   implements IPlayController {
-  public onPlayButton(): void {
-    this.props.onPlayButton();
+  public onPlay(): void {
+    this.props.onPlay();
   }
 
-  public onPauseButton(): void {
-    this.props.onPauseButton();
+  public onPause(): void {
+    this.props.onPause();
   }
 
-  public onRestButton(): void {
-    this.props.onRestButton();
+  public onRest(): void {
+    this.props.onRest();
   }
 
-  public onPrevButton(): void {
-    this.props.onPrevButton();
+  public onPrev(): void {
+    this.props.onPrev();
   }
 
-  public onNextButton(): void {
-    this.props.onNextButton();
+  public onNext(): void {
+    this.props.onNext();
   }
 
   render() {
