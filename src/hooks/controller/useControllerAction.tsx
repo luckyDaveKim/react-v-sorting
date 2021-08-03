@@ -10,6 +10,11 @@ export default function useControllerActions() {
     dispatch(stateActions.play());
   }, [dispatch]);
 
+  const onStop = useCallback(() => {
+    dispatch(stateActions.stop());
+    dispatch(chartDataActions.initPlayIndex());
+  }, [dispatch]);
+
   const onPause = useCallback(() => {
     dispatch(stateActions.pause());
   }, [dispatch]);
@@ -56,6 +61,7 @@ export default function useControllerActions() {
 
   return {
     onPlay,
+    onStop,
     onPause,
     onRest,
     onPrev,

@@ -9,7 +9,7 @@ const ChartController: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col md={3}>
+        <Col md={4}>
           <ChartPlayController />
         </Col>
         <Col md={2}>

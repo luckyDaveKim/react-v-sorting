@@ -4,11 +4,14 @@ import {
   faChevronRight,
   faPause,
   faPlay,
+  faStop,
   faRedo,
 } from '@fortawesome/free-solid-svg-icons';
 
 export interface IPlayController {
   onPlay(): void;
+
+  onStop(): void;
 
   onPause(): void;
 
@@ -22,117 +25,79 @@ export interface IPlayController {
 export interface IPlayState {
   onPlayButton(player: IPlayController): void;
 
+  onStopButton(player: IPlayController): void;
+
   onPrevButton(player: IPlayController): void;
 
   onNextButton(player: IPlayController): void;
 
   getPlayButtonIcon(): IconProp;
 
+  getStopButtonIcon(): IconProp;
+
   getPrevButtonIcon(): IconProp;
 
   getNextButtonIcon(): IconProp;
 }
 
-export class PlayState implements IPlayState {
-  onPlayButton(player: IPlayController): void {
+abstract class State implements IPlayState {
+  public onPlayButton(player: IPlayController): void {
+    player.onPlay();
+  }
+
+  public onStopButton(player: IPlayController): void {
+    player.onStop();
+  }
+
+  public onPrevButton(player: IPlayController): void {
+    player.onPrev();
+  }
+
+  public onNextButton(player: IPlayController): void {
+    player.onNext();
+  }
+
+  public getPlayButtonIcon(): IconProp {
+    return faPlay;
+  }
+
+  public getStopButtonIcon(): IconProp {
+    return faStop;
+  }
+
+  public getPrevButtonIcon(): IconProp {
+    return faChevronLeft;
+  }
+
+  public getNextButtonIcon(): IconProp {
+    return faChevronRight;
+  }
+}
+
+export class PlayState extends State {
+  public onPlayButton(player: IPlayController): void {
     player.onPause();
   }
 
-  onPrevButton(player: IPlayController): void {
-    player.onPrev();
-  }
-
-  onNextButton(player: IPlayController): void {
-    player.onNext();
-  }
-
-  getPlayButtonIcon(): IconProp {
+  public getPlayButtonIcon(): IconProp {
     return faPause;
   }
-
-  getPrevButtonIcon(): IconProp {
-    return faChevronLeft;
-  }
-
-  getNextButtonIcon(): IconProp {
-    return faChevronRight;
-  }
 }
 
-export class PauseState implements IPlayState {
-  onPlayButton(player: IPlayController): void {
-    player.onPlay();
-  }
+export class PauseState extends State {}
 
-  onPrevButton(player: IPlayController): void {
-    player.onPrev();
-  }
-
-  onNextButton(player: IPlayController): void {
-    player.onNext();
-  }
-
-  getPlayButtonIcon(): IconProp {
-    return faPlay;
-  }
-
-  getPrevButtonIcon(): IconProp {
-    return faChevronLeft;
-  }
-
-  getNextButtonIcon(): IconProp {
-    return faChevronRight;
-  }
-}
-
-export class DoneState implements IPlayState {
-  onPlayButton(player: IPlayController): void {
+export class DoneState extends State {
+  public onPlayButton(player: IPlayController): void {
     player.onRest();
   }
 
-  onPrevButton(player: IPlayController): void {
-    player.onPrev();
-  }
-
-  onNextButton(player: IPlayController): void {
-    player.onNext();
-  }
-
-  getPlayButtonIcon(): IconProp {
+  public getPlayButtonIcon(): IconProp {
     return faRedo;
-  }
-
-  getPrevButtonIcon(): IconProp {
-    return faChevronLeft;
-  }
-
-  getNextButtonIcon(): IconProp {
-    return faChevronRight;
   }
 }
 
-export class StopState implements IPlayState {
-  onPlayButton(player: IPlayController): void {
+export class StopState extends State {
+  public onPlayButton(player: IPlayController): void {
     player.onPlay();
-  }
-
-  onPrevButton(player: IPlayController): void {
-    player.onPrev();
-  }
-
-  onNextButton(player: IPlayController): void {
-    player.onNext();
-  }
-
-  getPlayButtonIcon(): IconProp {
-    return faPlay;
-  }
-
-  getPrevButtonIcon(): IconProp {
-    return faChevronLeft;
-  }
-
-  getNextButtonIcon(): IconProp {
-    return faChevronRight;
   }
 }
