@@ -85,7 +85,7 @@ class ChartPlayController
     return (
       <div className={styles.ChartPlayController}>
         <Button
-          variant={'outline-primary'}
+          variant={'outline-secondary'}
           size={'sm'}
           className={'m-1'}
           disabled={isFirstIndex}
@@ -107,7 +107,7 @@ class ChartPlayController
         </Button>
 
         <Button
-          variant={'outline-primary'}
+          variant={'outline-secondary'}
           className={'m-1'}
           disabled={isFirstIndex}
           onClick={() => {
@@ -118,7 +118,7 @@ class ChartPlayController
         </Button>
 
         <Button
-          variant={'outline-primary'}
+          variant={'outline-secondary'}
           size={'sm'}
           className={'m-1'}
           disabled={isLastIndex}

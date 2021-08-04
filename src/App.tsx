@@ -6,6 +6,7 @@ import rootReducer from './reducers';
 import rootSaga from './saga';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+import Header from './components/organisms/Header/Header';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -17,6 +18,7 @@ sagaMiddleware.run(rootSaga);
 const App: React.FC = () => {
   return (
     <Provider store={store}>
+      <Header />
       <SortVisualizer />
     </Provider>
   );
