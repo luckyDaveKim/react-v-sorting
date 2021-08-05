@@ -1,5 +1,6 @@
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
+import { createRange } from './helper';
 
 const mergeSort: ISort = nums => {
   // Init trace manager
@@ -9,11 +10,7 @@ const mergeSort: ISort = nums => {
     const mid = Math.floor((start + end) / 2);
 
     // Divide
-    const divideRange = Array.from(
-      { length: end - start + 1 },
-      (_, i) => i + start
-    );
-    traceManager.add(nums, [], divideRange);
+    traceManager.add(nums, [], createRange(start, end));
 
     if (start === end) return;
 
