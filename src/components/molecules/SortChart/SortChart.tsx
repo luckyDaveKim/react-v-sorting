@@ -3,6 +3,7 @@ import styles from './SortChart.module.css';
 import Bar from '../../atoms/Bar/Bar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
+import ChartProgress from '../../atoms/ChartProgress/ChartProgress';
 
 export interface ISortChartData {
   nums: number[];
@@ -23,21 +24,25 @@ const SortChart: React.FC = () => {
   ];
 
   return (
-    <ul className={styles.Chart}>
-      {nums.map((num, i) => {
-        return (
-          <Bar
-            key={i}
-            val={num}
-            isStateA={groupA.includes(i)}
-            isStateB={groupB.includes(i)}
-            isStateC={groupC.includes(i)}
-            isStateD={groupD.includes(i)}
-            isSorted={sortedIndices.includes(i)}
-          />
-        );
-      })}
-    </ul>
+    <>
+      <ul className={styles.Chart}>
+        {nums.map((num, i) => {
+          return (
+            <Bar
+              key={i}
+              val={num}
+              isStateA={groupA.includes(i)}
+              isStateB={groupB.includes(i)}
+              isStateC={groupC.includes(i)}
+              isStateD={groupD.includes(i)}
+              isSorted={sortedIndices.includes(i)}
+            />
+          );
+        })}
+      </ul>
+
+      <ChartProgress />
+    </>
   );
 };
 

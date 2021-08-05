@@ -1,0 +1,9 @@
+@import '../../../styles/color.css';
+
+.Progress {
+  -webkit-transition: 125ms ease-in-out;
+  -moz-transition: 125ms ease-in-out;
+  -o-transition: 125ms ease-in-out;
+  transition: 125ms ease-in-out;
+  margin-bottom: 1rem;
+}

@@ -4,7 +4,7 @@
   min-height: 400px;
   height: 50vh;
   background-color: var(--white);
-  padding: 1rem;
+  padding: 0 1rem;
   display: flex;
   align-items: flex-end;
   list-style: none;
