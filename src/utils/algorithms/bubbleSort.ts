@@ -10,7 +10,7 @@ const bubbleSort: ISort = nums => {
   for (let i = 1; i < dataSize; i++) {
     for (let j = 0; j < dataSize - i; j++) {
       // Comparing
-      traceManager.add(nums, [...traceManager.getLastSorted()], [j, j + 1]);
+      traceManager.add(nums, traceManager.getLastSorted(), [j, j + 1]);
 
       if (nums[j] > nums[j + 1]) {
         swap(nums, j, j + 1);
@@ -18,7 +18,7 @@ const bubbleSort: ISort = nums => {
         // Swap
         traceManager.add(
           nums,
-          [...traceManager.getLastSorted()],
+          traceManager.getLastSorted(),
           [],
           [j, j + 1]
         );

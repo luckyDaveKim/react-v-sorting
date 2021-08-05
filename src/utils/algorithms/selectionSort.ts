@@ -11,13 +11,13 @@ const selectionSort: ISort = nums => {
     let minIndex = i;
 
     // Set current min
-    traceManager.add(nums, [...traceManager.getLastSorted()], [minIndex]);
+    traceManager.add(nums, traceManager.getLastSorted(), [minIndex]);
 
     for (let j = i + 1; j < dataSize; j++) {
       // Comparing
       traceManager.add(
         nums,
-        [...traceManager.getLastSorted()],
+        traceManager.getLastSorted(),
         [],
         [minIndex, j]
       );
@@ -26,7 +26,7 @@ const selectionSort: ISort = nums => {
         minIndex = j;
 
         // Set current min
-        traceManager.add(nums, [...traceManager.getLastSorted()], [minIndex]);
+        traceManager.add(nums, traceManager.getLastSorted(), [minIndex]);
       }
     }
 
