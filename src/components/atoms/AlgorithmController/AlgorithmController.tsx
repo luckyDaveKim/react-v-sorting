@@ -5,6 +5,7 @@ import selectionSort from '../../../utils/algorithms/selectionSort';
 import bubbleSort from '../../../utils/algorithms/bubbleSort';
 import insertionSort from '../../../utils/algorithms/insertionSort';
 import mergeSort from '../../../utils/algorithms/mergeSort';
+import quickSort from '../../../utils/algorithms/quickSort';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
@@ -25,6 +26,9 @@ const AlgorithmController: React.FC = () => {
       case 'mergeSort':
         algorithm = mergeSort;
         break;
+      case 'quickSort':
+        algorithm = quickSort;
+        break;
       default:
         return;
     }
@@ -43,6 +47,7 @@ const AlgorithmController: React.FC = () => {
       <option value={'bubbleSort'}>Bubble Sort</option>
       <option value={'insertionSort'}>Insertion Sort</option>
       <option value={'mergeSort'}>Merge Sort</option>
+      <option value={'quickSort'}>Quick Sort</option>
     </Form.Control>
   );
 };
