@@ -14,9 +14,7 @@ const quickSort: ISort = nums => {
     let pivot = Math.floor((start + end) / 2);
 
     // Select pivot
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [
-      pivot,
-    ]);
+    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
 
     // Swap pivot
     traceManager.add(
@@ -43,9 +41,7 @@ const quickSort: ISort = nums => {
     pivot = start;
 
     // Select pivot
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [
-      pivot,
-    ]);
+    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
 
     let left = start + 1;
     let right = end;
@@ -138,12 +134,7 @@ const quickSort: ISort = nums => {
     pivot = left - 1;
 
     // Select pivot
-    traceManager.add(
-      nums,
-      traceManager.getLastSorted(),
-      divideRange,
-      [pivot]
-    );
+    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
 
     return pivot;
   }

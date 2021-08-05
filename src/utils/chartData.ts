@@ -1,16 +1,16 @@
 import { ISortChartData } from '../components/molecules/SortChart/SortChart';
 import { ISort } from './algorithms/ISort';
 
-const generateRandomNums = (size: number, maxValue: number) => {
+const createRandomNums = (size: number, maxValue: number) => {
   const nums: number[] = [];
   for (let i = 0; i < size; i++) {
-    const randomNum = generateRandomNum(maxValue);
+    const randomNum = createRandomNum(maxValue);
     nums.push(randomNum);
   }
   return nums;
 };
 
-const generateRandomNum = (maxValue: number): number => {
+const createRandomNum = (maxValue: number): number => {
   return Math.floor(Math.random() * maxValue) + 1;
 };
 
@@ -20,11 +20,11 @@ interface IRandomChartDataProps {
   algorithm: ISort;
 }
 
-export default function generateChartData({
+export default function createChartData({
   size,
   maxValue = 100,
   algorithm,
 }: IRandomChartDataProps): ISortChartData[] {
-  const nums = generateRandomNums(size, maxValue);
+  const nums = createRandomNums(size, maxValue);
   return algorithm(nums);
 }

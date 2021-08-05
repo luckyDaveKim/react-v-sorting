@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import generateChartData from '../utils/chartData';
+import createChartData from '../utils/chartData';
 import { ISortChartData } from '../components/molecules/SortChart/SortChart';
 import {
   CHANGE_ALGORITHM,
@@ -29,7 +29,7 @@ type ChartDataState = {
 export type ChartDataKey = keyof ChartDataState;
 
 const initialState: ChartDataState = {
-  data: generateChartData({ size: 10, algorithm: selectionSort }),
+  data: createChartData({ size: 10, algorithm: selectionSort }),
   legend: selectionSortLegend,
   playIndex: 0,
   speedRate: 1,
@@ -74,7 +74,7 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
       return {
         ...state,
         playIndex: 0,
-        data: generateChartData({
+        data: createChartData({
           size: state.size,
           algorithm: state.algorithm,
         }),

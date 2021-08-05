@@ -16,12 +16,7 @@ const bubbleSort: ISort = nums => {
         swap(nums, j, j + 1);
 
         // Swap
-        traceManager.add(
-          nums,
-          traceManager.getLastSorted(),
-          [],
-          [j, j + 1]
-        );
+        traceManager.add(nums, traceManager.getLastSorted(), [], [j, j + 1]);
       }
     }
 

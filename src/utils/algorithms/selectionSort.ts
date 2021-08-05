@@ -15,12 +15,7 @@ const selectionSort: ISort = nums => {
 
     for (let j = i + 1; j < dataSize; j++) {
       // Comparing
-      traceManager.add(
-        nums,
-        traceManager.getLastSorted(),
-        [],
-        [minIndex, j]
-      );
+      traceManager.add(nums, traceManager.getLastSorted(), [], [minIndex, j]);
 
       if (nums[j] < nums[minIndex]) {
         minIndex = j;
