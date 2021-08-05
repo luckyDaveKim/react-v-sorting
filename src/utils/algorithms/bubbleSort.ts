@@ -16,7 +16,14 @@ const bubbleSort: ISort = nums => {
         swap(nums, j, j + 1);
 
         // Swap
-        traceManager.add(nums, traceManager.getLastSorted(), [], [j, j + 1]);
+        traceManager.add(
+          nums,
+          traceManager.getLastSorted(),
+          [],
+          [],
+          [],
+          [j, j + 1]
+        );
       }
     }
 
@@ -30,6 +37,11 @@ const bubbleSort: ISort = nums => {
   return traceManager.getTrace();
 };
 
-export const bubbleSortLegend: ILegend = createLegend('Comparing', 'Swapping');
+export const bubbleSortLegend: ILegend = createLegend(
+  'Comparing',
+  null,
+  null,
+  'Swapping'
+);
 
 export default bubbleSort;

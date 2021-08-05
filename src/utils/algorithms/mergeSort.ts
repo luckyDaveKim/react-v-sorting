@@ -7,12 +7,12 @@ const mergeSort: ISort = nums => {
   const traceManager = new TraceManager(nums);
 
   function recursiveMergeSort(nums: number[], start: number, end: number) {
-    const mid = Math.floor((start + end) / 2);
-
     // Divide
     traceManager.add(nums, [], createRange(start, end));
 
     if (start === end) return;
+
+    const mid = Math.floor((start + end) / 2);
 
     recursiveMergeSort(nums, start, mid);
     recursiveMergeSort(nums, mid + 1, end);
@@ -34,7 +34,7 @@ const mergeSort: ISort = nums => {
           : rightPart[right++];
 
       // Combine
-      traceManager.add(nums, [], [], [i]);
+      traceManager.add(nums, [], [], [], [], [i]);
 
       i++;
     }
@@ -43,7 +43,7 @@ const mergeSort: ISort = nums => {
       nums[i] = leftPart[left++];
 
       // Combine
-      traceManager.add(nums, [], [], [i]);
+      traceManager.add(nums, [], [], [], [], [i]);
 
       i++;
     }
@@ -52,7 +52,7 @@ const mergeSort: ISort = nums => {
       nums[i] = rightPart[right++];
 
       // Combine
-      traceManager.add(nums, [], [], [i]);
+      traceManager.add(nums, [], [], [], [], [i]);
 
       i++;
     }
@@ -66,6 +66,11 @@ const mergeSort: ISort = nums => {
   return traceManager.getTrace();
 };
 
-export const mergeSortLegend = createLegend('Targeting range', 'Combined');
+export const mergeSortLegend = createLegend(
+  'Targeting',
+  null,
+  null,
+  'Combined'
+);
 
 export default mergeSort;

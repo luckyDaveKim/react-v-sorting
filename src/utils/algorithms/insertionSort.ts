@@ -12,7 +12,7 @@ const insertionSort: ISort = nums => {
     let holeIndex = i;
 
     // Save target value
-    traceManager.add(nums, [], [], [], [i]);
+    traceManager.add(nums, [], [], [i]);
 
     while (holeIndex > 0) {
       // Comparing
@@ -21,12 +21,12 @@ const insertionSort: ISort = nums => {
       if (nums[holeIndex - 1] <= targetValue) break;
 
       // Move
-      traceManager.add(nums, [], [], [holeIndex - 1, holeIndex]);
+      traceManager.add(nums, [], [], [], [], [holeIndex - 1, holeIndex]);
 
       nums[holeIndex] = nums[holeIndex - 1];
 
       // Move
-      traceManager.add(nums, [], [], [holeIndex - 1, holeIndex]);
+      traceManager.add(nums, [], [], [], [], [holeIndex - 1, holeIndex]);
 
       holeIndex--;
     }
@@ -34,21 +34,20 @@ const insertionSort: ISort = nums => {
     nums[holeIndex] = targetValue;
 
     // Load
-    traceManager.add(nums, [], [], [], [], [holeIndex]);
+    traceManager.add(nums, [], [], [], [holeIndex]);
   }
 
   // Sorted
   traceManager.add(nums, [...Array(nums.length).keys()]);
 
-  console.log(traceManager.getTrace());
   return traceManager.getTrace();
 };
 
 export const insertionSortLegend = createLegend(
   'Comparing',
-  'Moving',
   'Saving',
-  'Loading'
+  'Loading',
+  'Moving'
 );
 
 export default insertionSort;

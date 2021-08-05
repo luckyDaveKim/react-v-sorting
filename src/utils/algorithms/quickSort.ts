@@ -8,19 +8,24 @@ const quickSort: ISort = nums => {
 
   function partition(nums: number[], start: number, end: number): number {
     // Divide
-    const divideRange = createRange(start, end);
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange);
+    traceManager.add(
+      nums,
+      traceManager.getLastSorted(),
+      [],
+      [],
+      createRange(start, end)
+    );
 
     let pivot = Math.floor((start + end) / 2);
 
     // Select pivot
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
+    traceManager.add(nums, traceManager.getLastSorted(), [], [pivot]);
 
     // Swap pivot
     traceManager.add(
       nums,
       traceManager.getLastSorted(),
-      divideRange,
+      [],
       [],
       [],
       [start, pivot]
@@ -32,7 +37,7 @@ const quickSort: ISort = nums => {
     traceManager.add(
       nums,
       traceManager.getLastSorted(),
-      divideRange,
+      [],
       [],
       [],
       [start, pivot]
@@ -41,7 +46,7 @@ const quickSort: ISort = nums => {
     pivot = start;
 
     // Select pivot
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
+    traceManager.add(nums, traceManager.getLastSorted(), [], [pivot]);
 
     let left = start + 1;
     let right = end;
@@ -49,13 +54,7 @@ const quickSort: ISort = nums => {
     do {
       while (true) {
         // Compare
-        traceManager.add(
-          nums,
-          traceManager.getLastSorted(),
-          divideRange,
-          [pivot],
-          [left]
-        );
+        traceManager.add(nums, traceManager.getLastSorted(), [left], [pivot]);
 
         if (nums[left] < nums[pivot]) {
           left++;
@@ -66,13 +65,7 @@ const quickSort: ISort = nums => {
 
       while (true) {
         // Compare
-        traceManager.add(
-          nums,
-          traceManager.getLastSorted(),
-          divideRange,
-          [pivot],
-          [right]
-        );
+        traceManager.add(nums, traceManager.getLastSorted(), [right], [pivot]);
 
         if (nums[pivot] < nums[right]) {
           right--;
@@ -86,7 +79,7 @@ const quickSort: ISort = nums => {
         traceManager.add(
           nums,
           traceManager.getLastSorted(),
-          divideRange,
+          [],
           [pivot],
           [],
           [left, right]
@@ -98,7 +91,7 @@ const quickSort: ISort = nums => {
         traceManager.add(
           nums,
           traceManager.getLastSorted(),
-          divideRange,
+          [],
           [pivot],
           [],
           [left, right]
@@ -113,7 +106,7 @@ const quickSort: ISort = nums => {
     traceManager.add(
       nums,
       traceManager.getLastSorted(),
-      divideRange,
+      [],
       [],
       [],
       [pivot, left - 1]
@@ -125,7 +118,7 @@ const quickSort: ISort = nums => {
     traceManager.add(
       nums,
       traceManager.getLastSorted(),
-      divideRange,
+      [],
       [],
       [],
       [pivot, left - 1]
@@ -134,7 +127,7 @@ const quickSort: ISort = nums => {
     pivot = left - 1;
 
     // Select pivot
-    traceManager.add(nums, traceManager.getLastSorted(), divideRange, [pivot]);
+    traceManager.add(nums, traceManager.getLastSorted(), [], [pivot]);
 
     return pivot;
   }
@@ -166,6 +159,11 @@ const quickSort: ISort = nums => {
   return traceManager.getTrace();
 };
 
-export const quickSortLegend = createLegend('Targeting range', 'Pivot', 'Comparing', 'Swapping');
+export const quickSortLegend = createLegend(
+  'Comparing',
+  'Pivot',
+  'Targeting',
+  'Swapping'
+);
 
 export default quickSort;

@@ -6,7 +6,7 @@
   -o-transition: 125ms ease-in-out;
   transition: 125ms ease-in-out;
   width: 100%;
-  background-color: var(--gray);
+  background-color: #FAEBD7;
   margin: 1px;
 }
 
@@ -15,21 +15,21 @@
 }
 
 .BarStateA {
-  background-color: var(--red);
+  background-color: #FFBBAE;
 }
 
 .BarStateB {
-  background-color: var(--yellow);
+  background-color: #FFBF87;
 }
 
 .BarStateC {
-  background-color: var(--orange);
+  background-color: #95897D;
 }
 
 .BarStateD {
-  background-color: var(--green);
+  background-color: #CBE1D4
 }
 
 .BarSorting {
-  background-color: var(--blue);
+  background-color: #58A6D6;
 }

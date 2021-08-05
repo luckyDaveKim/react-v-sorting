@@ -11,27 +11,41 @@ const selectionSort: ISort = nums => {
     let minIndex = i;
 
     // Set current min
-    traceManager.add(nums, traceManager.getLastSorted(), [minIndex]);
+    traceManager.add(nums, traceManager.getLastSorted(), [], [minIndex]);
 
     for (let j = i + 1; j < dataSize; j++) {
       // Comparing
-      traceManager.add(nums, traceManager.getLastSorted(), [], [minIndex, j]);
+      traceManager.add(nums, traceManager.getLastSorted(), [minIndex, j]);
 
       if (nums[j] < nums[minIndex]) {
         minIndex = j;
 
         // Set current min
-        traceManager.add(nums, traceManager.getLastSorted(), [minIndex]);
+        traceManager.add(nums, traceManager.getLastSorted(), [], [minIndex]);
       }
     }
 
     // Swap
-    traceManager.add(nums, traceManager.getLastSorted(), [], [], [i, minIndex]);
+    traceManager.add(
+      nums,
+      traceManager.getLastSorted(),
+      [],
+      [],
+      [],
+      [i, minIndex]
+    );
 
     swap(nums, i, minIndex);
 
     // Swap
-    traceManager.add(nums, traceManager.getLastSorted(), [], [], [i, minIndex]);
+    traceManager.add(
+      nums,
+      traceManager.getLastSorted(),
+      [],
+      [],
+      [],
+      [i, minIndex]
+    );
 
     // Partial sorted trace
     traceManager.add(nums, [...traceManager.getLastSorted(), i]);
@@ -44,8 +58,9 @@ const selectionSort: ISort = nums => {
 };
 
 export const selectionSortLegend = createLegend(
-  'Setting current min',
   'Comparing',
+  'Setting current min',
+  null,
   'Swapping'
 );
 
