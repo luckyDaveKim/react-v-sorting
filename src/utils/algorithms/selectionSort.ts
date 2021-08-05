@@ -30,7 +30,13 @@ const selectionSort: ISort = nums => {
       }
     }
 
+    // Swap
+    traceManager.add(nums, traceManager.getLastSorted(), [], [], [i, minIndex]);
+
     swap(nums, i, minIndex);
+
+    // Swap
+    traceManager.add(nums, traceManager.getLastSorted(), [], [], [i, minIndex]);
 
     // Partial sorted trace
     traceManager.add(nums, [...traceManager.getLastSorted(), i]);

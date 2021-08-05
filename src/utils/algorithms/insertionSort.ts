@@ -20,6 +20,9 @@ const insertionSort: ISort = nums => {
 
       if (nums[holeIndex - 1] <= targetValue) break;
 
+      // Move
+      traceManager.add(nums, [], [], [holeIndex - 1, holeIndex]);
+
       nums[holeIndex] = nums[holeIndex - 1];
 
       // Move
