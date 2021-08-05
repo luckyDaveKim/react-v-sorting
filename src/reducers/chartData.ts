@@ -12,11 +12,15 @@ import {
 } from '../actions/chartdata/ChartDataActionTypes';
 import { ChartDataAction } from '../actions/chartdata/ChartDataAction';
 import { ISort } from '../utils/algorithms/ISort';
-import selectionSort from '../utils/algorithms/selectionSort';
+import selectionSort, {
+  selectionSortLegend,
+} from '../utils/algorithms/selectionSort';
+import { ILegend } from '../utils/algorithms/helper';
 
 /* Types */
 type ChartDataState = {
   data: ISortChartData[];
+  legend: ILegend;
   playIndex: number;
   speedRate: number;
   algorithm: ISort;
@@ -26,6 +30,7 @@ export type ChartDataKey = keyof ChartDataState;
 
 const initialState: ChartDataState = {
   data: generateChartData({ size: 10, algorithm: selectionSort }),
+  legend: selectionSortLegend,
   playIndex: 0,
   speedRate: 1,
   algorithm: selectionSort,
@@ -51,10 +56,16 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
       return { ...state, playIndex: nextPlayIndex };
     },
     [SET_SPEED_RATE]: (state, action) => {
+      console.log(action.payload);
       return { ...state, speedRate: action.payload };
     },
     [CHANGE_ALGORITHM]: (state, action) => {
-      return { ...state, algorithm: action.payload };
+      console.log(action.payload);
+      return {
+        ...state,
+        algorithm: action.payload.algorithm,
+        legend: action.payload.legend,
+      };
     },
     [CHANGE_SIZE]: (state, action) => {
       return { ...state, size: action.payload };

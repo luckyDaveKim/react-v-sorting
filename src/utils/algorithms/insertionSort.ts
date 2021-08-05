@@ -1,5 +1,6 @@
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
+import { createLegend } from './helper';
 
 const insertionSort: ISort = nums => {
   // Init trace manager
@@ -39,5 +40,12 @@ const insertionSort: ISort = nums => {
   console.log(traceManager.getTrace());
   return traceManager.getTrace();
 };
+
+export const insertionSortLegend = createLegend(
+  'Comparing',
+  'Moving',
+  'Saving',
+  'Loading'
+);
 
 export default insertionSort;

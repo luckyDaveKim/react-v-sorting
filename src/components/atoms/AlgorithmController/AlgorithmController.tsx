@@ -1,39 +1,55 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
-import selectionSort from '../../../utils/algorithms/selectionSort';
-import bubbleSort from '../../../utils/algorithms/bubbleSort';
-import insertionSort from '../../../utils/algorithms/insertionSort';
-import mergeSort from '../../../utils/algorithms/mergeSort';
-import quickSort from '../../../utils/algorithms/quickSort';
+import selectionSort, {
+  selectionSortLegend,
+} from '../../../utils/algorithms/selectionSort';
+import bubbleSort, {
+  bubbleSortLegend,
+} from '../../../utils/algorithms/bubbleSort';
+import insertionSort, {
+  insertionSortLegend,
+} from '../../../utils/algorithms/insertionSort';
+import mergeSort, {
+  mergeSortLegend,
+} from '../../../utils/algorithms/mergeSort';
+import quickSort, {
+  quickSortLegend,
+} from '../../../utils/algorithms/quickSort';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     let algorithm;
+    let legend;
 
     switch (event.target.value) {
       case 'selectionSort':
         algorithm = selectionSort;
+        legend = selectionSortLegend;
         break;
       case 'bubbleSort':
         algorithm = bubbleSort;
+        legend = bubbleSortLegend;
         break;
       case 'insertionSort':
         algorithm = insertionSort;
+        legend = insertionSortLegend;
         break;
       case 'mergeSort':
         algorithm = mergeSort;
+        legend = mergeSortLegend;
         break;
       case 'quickSort':
         algorithm = quickSort;
+        legend = quickSortLegend;
         break;
       default:
         return;
     }
 
-    controllerActions.changeAlgorithm(algorithm);
+    controllerActions.changeAlgorithm(algorithm, legend);
   };
 
   return (

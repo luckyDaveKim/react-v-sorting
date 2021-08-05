@@ -1,4 +1,4 @@
-import { createRange, swap } from './helper';
+import { createLegend, createRange, swap } from './helper';
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
 
@@ -174,5 +174,7 @@ const quickSort: ISort = nums => {
 
   return traceManager.getTrace();
 };
+
+export const quickSortLegend = createLegend('Targeting range', 'Pivot', 'Comparing', 'Swapping');
 
 export default quickSort;

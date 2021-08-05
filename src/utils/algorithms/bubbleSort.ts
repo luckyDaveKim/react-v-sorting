@@ -1,4 +1,4 @@
-import { swap } from './helper';
+import { createLegend, ILegend, swap } from './helper';
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
 
@@ -34,5 +34,7 @@ const bubbleSort: ISort = nums => {
 
   return traceManager.getTrace();
 };
+
+export const bubbleSortLegend: ILegend = createLegend('Comparing', 'Swapping');
 
 export default bubbleSort;

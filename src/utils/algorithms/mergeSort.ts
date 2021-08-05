@@ -1,6 +1,6 @@
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
-import { createRange } from './helper';
+import { createLegend, createRange } from './helper';
 
 const mergeSort: ISort = nums => {
   // Init trace manager
@@ -65,5 +65,7 @@ const mergeSort: ISort = nums => {
 
   return traceManager.getTrace();
 };
+
+export const mergeSortLegend = createLegend('Targeting range', 'Combined');
 
 export default mergeSort;

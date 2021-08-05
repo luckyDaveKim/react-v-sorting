@@ -1,0 +1,20 @@
+@import '../../../styles/color.css';
+
+.Legend {
+  list-style: none;
+  align-items: flex-end;
+}
+
+.LegendBox {
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.5rem;
+}
+
+.LegendItem {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4rem;
+  padding: 4px;
+}

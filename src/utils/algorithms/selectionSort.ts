@@ -1,4 +1,4 @@
-import { swap } from './helper';
+import { createLegend, swap } from './helper';
 import { ISort } from './ISort';
 import { TraceManager } from './trace';
 
@@ -41,5 +41,11 @@ const selectionSort: ISort = nums => {
 
   return traceManager.getTrace();
 };
+
+export const selectionSortLegend = createLegend(
+  'Setting current min',
+  'Comparing',
+  'Swapping'
+);
 
 export default selectionSort;
