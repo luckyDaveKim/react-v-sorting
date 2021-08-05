@@ -16,6 +16,7 @@ import mergeSort, {
 import quickSort, {
   quickSortLegend,
 } from '../../../utils/algorithms/quickSort';
+import heapSort, { heapSortLegend } from '../../../utils/algorithms/heapSort';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
@@ -45,6 +46,10 @@ const AlgorithmController: React.FC = () => {
         algorithm = quickSort;
         legend = quickSortLegend;
         break;
+      case 'heapSort':
+        algorithm = heapSort;
+        legend = heapSortLegend;
+        break;
       default:
         return;
     }
@@ -64,6 +69,7 @@ const AlgorithmController: React.FC = () => {
       <option value={'insertionSort'}>Insertion Sort</option>
       <option value={'mergeSort'}>Merge Sort</option>
       <option value={'quickSort'}>Quick Sort</option>
+      <option value={'heapSort'}>Heap Sort</option>
     </Form.Control>
   );
 };
