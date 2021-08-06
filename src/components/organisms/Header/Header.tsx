@@ -5,7 +5,7 @@ import SizeController from '../../atoms/SizeController/SizeController';
 
 const Header: React.FC = () => {
   return (
-    <Navbar bg="light" expand="lg" className="mb-3">
+    <Navbar sticky="top" bg="light" expand="lg" className="mb-3">
       <Container>
         <Navbar.Brand href="/">React V Sorting</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
