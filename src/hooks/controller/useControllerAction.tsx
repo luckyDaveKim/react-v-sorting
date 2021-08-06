@@ -42,9 +42,17 @@ export default function useControllerActions() {
   );
 
   const changeAlgorithm = useCallback(
-    (algorithm, legend) => {
+    (algorithm, legend, title, description, performance) => {
       dispatch(stateActions.stop());
-      dispatch(chartDataActions.changeAlgorithm(algorithm, legend));
+      dispatch(
+        chartDataActions.changeAlgorithm(
+          algorithm,
+          legend,
+          title,
+          description,
+          performance
+        )
+      );
       dispatch(chartDataActions.initData());
     },
     [dispatch]

@@ -28,3 +28,36 @@ export const createLegend = (
     sorted: 'Sorted',
   };
 };
+
+export type ITitle = string;
+
+export type IDescription = JSX.Element;
+
+export interface IPerformance {
+  time: {
+    worstCase: JSX.Element;
+    bestCase: JSX.Element;
+    averageCase: JSX.Element;
+  };
+  space: {
+    worstCase: JSX.Element;
+  };
+}
+
+export const createPerformance = (
+  timeWorstCase: JSX.Element,
+  timeBestCase: JSX.Element,
+  timeAverageCase: JSX.Element,
+  spaceWorstCase: JSX.Element
+): IPerformance => {
+  return {
+    time: {
+      worstCase: timeWorstCase,
+      bestCase: timeBestCase,
+      averageCase: timeAverageCase,
+    },
+    space: {
+      worstCase: spaceWorstCase,
+    },
+  };
+};
