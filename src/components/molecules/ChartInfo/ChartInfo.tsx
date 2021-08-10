@@ -4,6 +4,7 @@ import ChartPerformance from '../../atoms/ChartPerformance/ChartPerformance';
 import ChartDescription from '../../atoms/ChartDescription/ChartDescription';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
+import ChartCode from '../../atoms/ChartCode/ChartCode';
 
 const ChartInfo: React.FC = () => {
   const title = useSelector((state: RootState) => state.chartData.title);
@@ -21,6 +22,11 @@ const ChartInfo: React.FC = () => {
         </Col>
         <Col lg={6} className="border-left">
           <ChartPerformance />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <ChartCode />
         </Col>
       </Row>
     </Container>

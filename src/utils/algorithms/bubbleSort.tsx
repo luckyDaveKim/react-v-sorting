@@ -1,6 +1,7 @@
 import {
   createLegend,
   createPerformance,
+  ICode,
   IDescription,
   ILegend,
   IPerformance,
@@ -85,5 +86,7 @@ export const bubbleSortPerformance: IPerformance = createPerformance(
   <span>O(n)</span>,
   <span>O(1)</span>
 );
+
+export const bubbleSortCode: ICode = ``;
 
 export default bubbleSort;

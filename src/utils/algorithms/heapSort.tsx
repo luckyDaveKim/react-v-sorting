@@ -2,6 +2,7 @@ import {
   createLegend,
   createPerformance,
   createRange,
+  ICode,
   IDescription,
   ILegend,
   IPerformance,
@@ -169,5 +170,7 @@ export const heapSortPerformance: IPerformance = createPerformance(
   </span>,
   <span>O(1)</span>
 );
+
+export const heapSortCode: ICode = ``;
 
 export default heapSort;

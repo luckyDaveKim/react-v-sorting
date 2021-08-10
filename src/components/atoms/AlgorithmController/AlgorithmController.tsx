@@ -2,36 +2,42 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
 import selectionSort, {
+  selectionSortCode,
   selectionSortDescription,
   selectionSortLegend,
   selectionSortPerformance,
   selectionSortTitle,
 } from '../../../utils/algorithms/selectionSort';
 import bubbleSort, {
+  bubbleSortCode,
   bubbleSortDescription,
   bubbleSortLegend,
   bubbleSortPerformance,
   bubbleSortTitle,
 } from '../../../utils/algorithms/bubbleSort';
 import insertionSort, {
+  insertionSortCode,
   insertionSortDescription,
   insertionSortLegend,
   insertionSortPerformance,
   insertionSortTitle,
 } from '../../../utils/algorithms/insertionSort';
 import mergeSort, {
+  mergeSortCode,
   mergeSortDescription,
   mergeSortLegend,
   mergeSortPerformance,
   mergeSortTitle,
 } from '../../../utils/algorithms/mergeSort';
 import quickSort, {
+  quickSortCode,
   quickSortDescription,
   quickSortLegend,
   quickSortPerformance,
   quickSortTitle,
 } from '../../../utils/algorithms/quickSort';
 import heapSort, {
+  heapSortCode,
   heapSortDescription,
   heapSortLegend,
   heapSortPerformance,
@@ -47,6 +53,7 @@ const AlgorithmController: React.FC = () => {
     let title;
     let description;
     let performance;
+    let code;
 
     switch (event.target.value) {
       case 'selectionSort':
@@ -55,6 +62,7 @@ const AlgorithmController: React.FC = () => {
         title = selectionSortTitle;
         description = selectionSortDescription;
         performance = selectionSortPerformance;
+        code = selectionSortCode;
         break;
       case 'bubbleSort':
         algorithm = bubbleSort;
@@ -62,6 +70,7 @@ const AlgorithmController: React.FC = () => {
         title = bubbleSortTitle;
         description = bubbleSortDescription;
         performance = bubbleSortPerformance;
+        code = bubbleSortCode;
         break;
       case 'insertionSort':
         algorithm = insertionSort;
@@ -69,6 +78,7 @@ const AlgorithmController: React.FC = () => {
         title = insertionSortTitle;
         description = insertionSortDescription;
         performance = insertionSortPerformance;
+        code = insertionSortCode;
         break;
       case 'mergeSort':
         algorithm = mergeSort;
@@ -76,6 +86,7 @@ const AlgorithmController: React.FC = () => {
         title = mergeSortTitle;
         description = mergeSortDescription;
         performance = mergeSortPerformance;
+        code = mergeSortCode;
         break;
       case 'quickSort':
         algorithm = quickSort;
@@ -83,6 +94,7 @@ const AlgorithmController: React.FC = () => {
         title = quickSortTitle;
         description = quickSortDescription;
         performance = quickSortPerformance;
+        code = quickSortCode;
         break;
       case 'heapSort':
         algorithm = heapSort;
@@ -90,6 +102,7 @@ const AlgorithmController: React.FC = () => {
         title = heapSortTitle;
         description = heapSortDescription;
         performance = heapSortPerformance;
+        code = heapSortCode;
         break;
       default:
         return;
@@ -100,7 +113,8 @@ const AlgorithmController: React.FC = () => {
       legend,
       title,
       description,
-      performance
+      performance,
+      code
     );
   };
 

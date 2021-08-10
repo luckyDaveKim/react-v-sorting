@@ -61,3 +61,5 @@ export const createPerformance = (
     },
   };
 };
+
+export type ICode = string;

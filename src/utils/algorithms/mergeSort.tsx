@@ -4,6 +4,7 @@ import {
   createLegend,
   createPerformance,
   createRange,
+  ICode,
   IDescription,
   IPerformance,
   ITitle,
@@ -121,5 +122,7 @@ export const mergeSortPerformance: IPerformance = createPerformance(
   </span>,
   <span>O(1)</span>
 );
+
+export const mergeSortCode: ICode = ``;
 
 export default mergeSort;

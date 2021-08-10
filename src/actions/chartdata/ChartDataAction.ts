@@ -10,6 +10,7 @@ import {
 } from './ChartDataActionTypes';
 import { ISort } from '../../utils/algorithms/ISort';
 import {
+  ICode,
   IDescription,
   ILegend,
   IPerformance,
@@ -27,8 +28,9 @@ export const changeAlgorithm = createAction(
     legend: ILegend,
     title: ITitle,
     description: IDescription,
-    performance: IPerformance
-  ) => ({ algorithm, legend, title, description, performance })
+    performance: IPerformance,
+    code: ICode
+  ) => ({ algorithm, legend, title, description, performance, code })
 )();
 export const changeSize = createAction(CHANGE_SIZE)<number>();
 export const initData = createAction(INIT_DATA)();

@@ -1,6 +1,7 @@
 import {
   createLegend,
   createPerformance,
+  ICode,
   IDescription,
   IPerformance,
   ITitle,
@@ -109,5 +110,25 @@ export const selectionSortPerformance: IPerformance = createPerformance(
   </span>,
   <span>O(1)</span>
 );
+
+export const selectionSortCode: ICode = `
+  function selectionSort(nums: number[]): void {
+    const n = nums.length;
+
+    for (let i = 0; i < n - 1; i++) {
+      let minIndex = i;
+
+      for (let j = i + 1; j < n; j++) {
+        if (nums[j] < nums[minIndex]) {
+          minIndex = j;
+        }
+      }
+
+      const temp = nums[i];
+      nums[i] = nums[minIndex];
+      nums[minIndex] = temp;
+    }
+  }    
+`;
 
 export default selectionSort;

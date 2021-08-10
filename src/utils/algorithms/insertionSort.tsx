@@ -3,6 +3,7 @@ import { TraceManager } from './trace';
 import {
   createLegend,
   createPerformance,
+  ICode,
   IDescription,
   IPerformance,
   ITitle,
@@ -91,5 +92,7 @@ export const insertionSortPerformance: IPerformance = createPerformance(
   <span>O(n)</span>,
   <span>O(1)</span>
 );
+
+export const insertionSortCode: ICode = ``;
 
 export default insertionSort;

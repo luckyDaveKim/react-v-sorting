@@ -2,6 +2,7 @@ import {
   createLegend,
   createPerformance,
   createRange,
+  ICode,
   IDescription,
   IPerformance,
   ITitle,
@@ -235,5 +236,7 @@ export const quickSortPerformance: IPerformance = createPerformance(
     O(log <em>n</em>)
   </span>
 );
+
+export const quickSortCode: ICode = ``;
 
 export default quickSort;
