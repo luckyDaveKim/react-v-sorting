@@ -6,7 +6,10 @@ import styles from './ChartLegend.module.css';
 import barStyles from '../../atoms/Bar/Bar.module.css';
 
 const ChartLegend: React.FC = () => {
-  const legend = useSelector((state: RootState) => state.chartData.legend);
+  const sortChart = useSelector(
+    (state: RootState) => state.chartData.sortChart
+  );
+  const legend = sortChart.getLegend();
 
   const barGroupA = legend.groupA ? (
     <li className={styles.LegendItem}>

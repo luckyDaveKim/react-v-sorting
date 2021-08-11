@@ -11,47 +11,30 @@ import {
   SET_SPEED_RATE,
 } from '../actions/chartdata/ChartDataActionTypes';
 import { ChartDataAction } from '../actions/chartdata/ChartDataAction';
-import { ISort } from '../utils/algorithms/ISort';
-import selectionSort, {
-  selectionSortCode,
-  selectionSortDescription,
-  selectionSortLegend,
-  selectionSortPerformance,
-  selectionSortTitle,
-} from '../utils/algorithms/selectionSort';
-import {
-  ICode,
-  IDescription,
-  ILegend,
-  IPerformance,
-  ITitle,
-} from '../utils/algorithms/helper';
+import { ISortChart } from '../utils/algorithms/ISortChart';
+import { SelectionSortChart } from '../utils/algorithms/SelectionSortChart';
 
 /* Types */
 type ChartDataState = {
+  sortChart: ISortChart;
   data: ISortChartData[];
-  legend: ILegend;
-  title: ITitle;
-  description: IDescription;
-  performance: IPerformance;
-  code: ICode;
   playIndex: number;
   speedRate: number;
-  algorithm: ISort;
   size: number;
 };
 export type ChartDataKey = keyof ChartDataState;
 
+const selectionSortChart = new SelectionSortChart();
+const chartData = createChartData({
+  size: 10,
+  algorithm: selectionSortChart.sort,
+});
+
 const initialState: ChartDataState = {
-  data: createChartData({ size: 10, algorithm: selectionSort }),
-  legend: selectionSortLegend,
-  title: selectionSortTitle,
-  description: selectionSortDescription,
-  performance: selectionSortPerformance,
-  code: selectionSortCode,
+  sortChart: selectionSortChart,
+  data: chartData,
   playIndex: 0,
   speedRate: 1,
-  algorithm: selectionSort,
   size: 10,
 };
 
@@ -77,15 +60,7 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
       return { ...state, speedRate: action.payload };
     },
     [CHANGE_ALGORITHM]: (state, action) => {
-      return {
-        ...state,
-        algorithm: action.payload.algorithm,
-        legend: action.payload.legend,
-        title: action.payload.title,
-        description: action.payload.description,
-        performance: action.payload.performance,
-        code: action.payload.code,
-      };
+      return { ...state, sortChart: action.payload };
     },
     [CHANGE_SIZE]: (state, action) => {
       return { ...state, size: action.payload };
@@ -96,7 +71,7 @@ const controller = createReducer<ChartDataState, ChartDataAction>(
         playIndex: 0,
         data: createChartData({
           size: state.size,
-          algorithm: state.algorithm,
+          algorithm: state.sortChart.sort,
         }),
       };
     },

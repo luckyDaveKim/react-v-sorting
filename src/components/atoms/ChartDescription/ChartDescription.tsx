@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
 
 const ChartDescription: React.FC = () => {
-  const description = useSelector(
-    (state: RootState) => state.chartData.description
+  const sortChart = useSelector(
+    (state: RootState) => state.chartData.sortChart
   );
 
-  return <>{description}</>;
+  return <>{sortChart.getDescription()}</>;
 };
 
 export default ChartDescription;

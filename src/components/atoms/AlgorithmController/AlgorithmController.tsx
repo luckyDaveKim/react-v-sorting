@@ -1,121 +1,43 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import useControllerActions from '../../../hooks/controller/useControllerAction';
-import selectionSort, {
-  selectionSortCode,
-  selectionSortDescription,
-  selectionSortLegend,
-  selectionSortPerformance,
-  selectionSortTitle,
-} from '../../../utils/algorithms/selectionSort';
-import bubbleSort, {
-  bubbleSortCode,
-  bubbleSortDescription,
-  bubbleSortLegend,
-  bubbleSortPerformance,
-  bubbleSortTitle,
-} from '../../../utils/algorithms/bubbleSort';
-import insertionSort, {
-  insertionSortCode,
-  insertionSortDescription,
-  insertionSortLegend,
-  insertionSortPerformance,
-  insertionSortTitle,
-} from '../../../utils/algorithms/insertionSort';
-import mergeSort, {
-  mergeSortCode,
-  mergeSortDescription,
-  mergeSortLegend,
-  mergeSortPerformance,
-  mergeSortTitle,
-} from '../../../utils/algorithms/mergeSort';
-import quickSort, {
-  quickSortCode,
-  quickSortDescription,
-  quickSortLegend,
-  quickSortPerformance,
-  quickSortTitle,
-} from '../../../utils/algorithms/quickSort';
-import heapSort, {
-  heapSortCode,
-  heapSortDescription,
-  heapSortLegend,
-  heapSortPerformance,
-  heapSortTitle,
-} from '../../../utils/algorithms/heapSort';
+import { SelectionSortChart } from '../../../utils/algorithms/SelectionSortChart';
+import { BubbleSortChart } from '../../../utils/algorithms/BubbleSortChart';
+import { InsertionSortChart } from '../../../utils/algorithms/InsertionSortChart';
+import { MergeSortChart } from '../../../utils/algorithms/MergeSortChart';
+import { QuickSortChart } from '../../../utils/algorithms/QuickSortChart';
+import { HeapSortChart } from '../../../utils/algorithms/HeapSortChart';
 
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let algorithm;
-    let legend;
-    let title;
-    let description;
-    let performance;
-    let code;
+    let sortChart;
 
     switch (event.target.value) {
       case 'selectionSort':
-        algorithm = selectionSort;
-        legend = selectionSortLegend;
-        title = selectionSortTitle;
-        description = selectionSortDescription;
-        performance = selectionSortPerformance;
-        code = selectionSortCode;
+        sortChart = new SelectionSortChart();
         break;
       case 'bubbleSort':
-        algorithm = bubbleSort;
-        legend = bubbleSortLegend;
-        title = bubbleSortTitle;
-        description = bubbleSortDescription;
-        performance = bubbleSortPerformance;
-        code = bubbleSortCode;
+        sortChart = new BubbleSortChart();
         break;
       case 'insertionSort':
-        algorithm = insertionSort;
-        legend = insertionSortLegend;
-        title = insertionSortTitle;
-        description = insertionSortDescription;
-        performance = insertionSortPerformance;
-        code = insertionSortCode;
+        sortChart = new InsertionSortChart();
         break;
       case 'mergeSort':
-        algorithm = mergeSort;
-        legend = mergeSortLegend;
-        title = mergeSortTitle;
-        description = mergeSortDescription;
-        performance = mergeSortPerformance;
-        code = mergeSortCode;
+        sortChart = new MergeSortChart();
         break;
       case 'quickSort':
-        algorithm = quickSort;
-        legend = quickSortLegend;
-        title = quickSortTitle;
-        description = quickSortDescription;
-        performance = quickSortPerformance;
-        code = quickSortCode;
+        sortChart = new QuickSortChart();
         break;
       case 'heapSort':
-        algorithm = heapSort;
-        legend = heapSortLegend;
-        title = heapSortTitle;
-        description = heapSortDescription;
-        performance = heapSortPerformance;
-        code = heapSortCode;
+        sortChart = new HeapSortChart();
         break;
       default:
         return;
     }
 
-    controllerActions.changeAlgorithm(
-      algorithm,
-      legend,
-      title,
-      description,
-      performance,
-      code
-    );
+    controllerActions.changeAlgorithm(sortChart);
   };
 
   return (

@@ -7,13 +7,15 @@ import { RootState } from '../../../reducers';
 import ChartCode from '../../atoms/ChartCode/ChartCode';
 
 const ChartInfo: React.FC = () => {
-  const title = useSelector((state: RootState) => state.chartData.title);
+  const sortChart = useSelector(
+    (state: RootState) => state.chartData.sortChart
+  );
 
   return (
     <Container className="p-3 my-5">
       <Row>
         <Col className="border-top border-dark m-3 p-3">
-          <h1>{title}</h1>
+          <h1>{sortChart.getTitle()}</h1>
         </Col>
       </Row>
       <Row>

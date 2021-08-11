@@ -42,18 +42,9 @@ export default function useControllerActions() {
   );
 
   const changeAlgorithm = useCallback(
-    (algorithm, legend, title, description, performance, code) => {
+    sortChart => {
       dispatch(stateActions.stop());
-      dispatch(
-        chartDataActions.changeAlgorithm(
-          algorithm,
-          legend,
-          title,
-          description,
-          performance,
-          code
-        )
-      );
+      dispatch(chartDataActions.changeAlgorithm(sortChart));
       dispatch(chartDataActions.initData());
     },
     [dispatch]

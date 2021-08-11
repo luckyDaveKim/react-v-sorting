@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
 
 const ChartCode: React.FC = () => {
-  const code = useSelector((state: RootState) => state.chartData.code);
+  const sortChart = useSelector(
+    (state: RootState) => state.chartData.sortChart
+  );
 
   return (
     <p className={'my-5'}>
-      <Highlight language="TypeScript">{code}</Highlight>
+      <Highlight language="TypeScript">{sortChart.getCode()}</Highlight>
     </p>
   );
 };
