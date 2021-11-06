@@ -5,12 +5,12 @@ import { Form } from 'react-bootstrap';
 const SizeController: React.FC = () => {
   const controllerActions = useControllerActions();
 
-  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     controllerActions.changeSize(event.target.value);
   };
 
   return (
-    <Form.Control as="select" custom defaultValue={10} onChange={onChange}>
+    <Form.Control as="select" defaultValue={10} onChange={onChange}>
       <option value={5}>5</option>
       <option value={10}>10</option>
       <option value={25}>25</option>

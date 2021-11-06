@@ -5,12 +5,12 @@ import { Form } from 'react-bootstrap';
 const SpeedController: React.FC = () => {
   const controllerActions = useControllerActions();
 
-  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     controllerActions.setSpeedRate(event.target.value);
   };
 
   return (
-    <Form.Control as="select" custom defaultValue={1} onChange={onChange}>
+    <Form.Control as="select" defaultValue={1} onChange={onChange}>
       <option value={0.5}>x0.5</option>
       <option value={1}>x1.0</option>
       <option value={1.5}>x1.5</option>

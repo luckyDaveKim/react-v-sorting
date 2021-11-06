@@ -11,7 +11,7 @@ import { HeapSortChart } from '../../../utils/algorithms/HeapSortChart';
 const AlgorithmController: React.FC = () => {
   const controllerActions = useControllerActions();
 
-  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let sortChart;
 
     switch (event.target.value) {
@@ -43,7 +43,6 @@ const AlgorithmController: React.FC = () => {
   return (
     <Form.Control
       as="select"
-      custom
       defaultValue={'selectionSort'}
       onChange={onChange}
     >
