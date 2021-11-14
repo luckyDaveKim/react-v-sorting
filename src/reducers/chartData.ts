@@ -15,7 +15,7 @@ import { ISortChart } from '../utils/algorithms/ISortChart';
 import { SelectionSortChart } from '../utils/algorithms/SelectionSortChart';
 
 /* Types */
-type ChartDataState = {
+export type ChartDataState = {
   sortChart: ISortChart;
   data: ISortChartData[];
   playIndex: number;

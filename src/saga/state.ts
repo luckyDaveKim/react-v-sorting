@@ -13,17 +13,20 @@ import * as RunnerActions from '../actions/runner/RunnerAction';
 import * as StateActions from '../actions/state/StateAction';
 import * as ChartDataActions from '../actions/chartdata/ChartDataAction';
 import { closeChannel, subscribe } from './channel';
-import { buffers, EventChannel } from 'redux-saga';
+import { buffers, EventChannel, Task } from 'redux-saga';
 import { RootState } from '../reducers';
+import { TakeEffect } from '@redux-saga/core/effects';
+import { ChartDataState } from '../reducers/chartData';
 
 export function* start() {
   yield put(RunnerActions.watch());
 }
 
 export function* watcher() {
-  while (yield take(RunnerActions.watch)) {
+  const watchActionEffect: TakeEffect = yield take(RunnerActions.watch);
+  while (watchActionEffect) {
     try {
-      const worker = yield fork(connectChannel);
+      const worker: Task = yield fork(connectChannel);
       yield take([StateActions.stop, StateActions.done]);
       yield cancel(worker);
     } catch (error) {
@@ -42,7 +45,7 @@ function* connectChannel() {
 
     while (true) {
       yield flush(channel);
-      const store = yield select(getPlayerFromStore);
+      const store: ChartDataState = yield select(getPlayerFromStore);
       if (store.data.length - 1 <= store.playIndex) {
         break;
       }
