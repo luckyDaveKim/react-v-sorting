@@ -47,13 +47,13 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/bootstrap": "^5.1.6",
     "@types/highlight.js": "^10.1.0",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.11",
+    "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-bootstrap": "^0.32.28",
     "@types/react-dom": "^17.0.11",
